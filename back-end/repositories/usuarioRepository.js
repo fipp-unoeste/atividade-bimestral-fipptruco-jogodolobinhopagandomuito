@@ -29,6 +29,14 @@ export default class UsuarioRepository extends BaseRepository{
     return result
   }
 
+  async verificarEmailExistente(email){
+    let sql = "SELECT * FROM tb_usuario WHERE usu_email = ?"
+    let valores = [email]
+    let rows = await this.db.ExecutaComando(sql, valores)
+
+    return rows.length > 0
+  }
+
   toMap(rows){
     if(rows && typeof rows.length == "number"){
       let lista = []

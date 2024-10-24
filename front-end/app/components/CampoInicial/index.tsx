@@ -57,11 +57,11 @@ export default function CampoInicial(){
       <p>O melhor lugar para jogar truco online com seus amigos!</p>
 
       <DivEstilizada>
-        <Link href="">
+        <Link href="pages/cadastrar">
           <button id="botaoCriarConta">Criar Conta</button>
         </Link>
 
-        <Link href="">
+        <Link href="pages/entrar">
           <button>Entrar</button>
         </Link>
       </DivEstilizada>

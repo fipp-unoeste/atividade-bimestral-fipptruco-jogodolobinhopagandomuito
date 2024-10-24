@@ -33,8 +33,17 @@ export default class UsuarioController{
       let {nome, email, senha} = req.body
 
       if(nome && email && senha){
-        let entidade = new UsuarioEntity(0, nome, email, senha)
         let repo = new UsuarioRepository()
+
+        let emailExistente = await repo.verificarEmailExistente(email)
+        
+        if(emailExistente){
+          res.status(400).json({ msg: "Email já cadastrado!" })
+          return
+        }
+
+        let entidade = new UsuarioEntity(0, nome, email, senha)
+        
         let result = await repo.gravar(entidade)
 
         if(result){ res.status(201).json({ msg: "Usuário gravado com sucesso!" }) }

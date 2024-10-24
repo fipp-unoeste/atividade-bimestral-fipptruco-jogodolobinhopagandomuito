@@ -45,7 +45,7 @@ export default function JogueAgora(){
         <p>Crie sua conta gratuitamente e junte-se a milhares de jogadores</p>
       </div>
 
-      <Link href="">
+      <Link href="pages/cadastrar">
         <button>Criar Conta Grátis</button>
       </Link>
     </SectionEstilizado>
