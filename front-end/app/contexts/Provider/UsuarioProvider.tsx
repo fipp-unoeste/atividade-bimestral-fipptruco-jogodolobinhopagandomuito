@@ -27,7 +27,8 @@ export const UsuarioProvider = ({ children }: { children: React.ReactNode }) => 
       setUsuario(response.data.usuario)
       setIsAutenticado(true)
       
-      router.push("/")
+      if(tipo == "Cadastrar"){ router.push("entrar") }
+      else{ router.push("area-do-jogador") }
     } 
     catch(error: unknown){
       console.error("Erro:", error)
