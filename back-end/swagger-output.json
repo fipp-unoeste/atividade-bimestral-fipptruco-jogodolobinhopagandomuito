@@ -10,9 +10,107 @@
       "url": "http://localhost:5000/"
     }
   ],
-  "paths": {},
+  "paths": {
+    "/usuarios/": {
+      "get": {
+        "tags": [
+          "Usuário"
+        ],
+        "summary": "Endpoint para retornar todos os usuários",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Usuário"
+        ],
+        "summary": "Cadastra um usuário",
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/usuarioModel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/{id}": {
+      "get": {
+        "tags": [
+          "Usuário"
+        ],
+        "summary": "Retorna um usuário baseado em um código",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
   "components": {
-    "schemas": {},
+    "schemas": {
+      "usuarioModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 0
+          },
+          "nome": {
+            "type": "string",
+            "example": "vitorvalentin840@gmail.com"
+          },
+          "email": {
+            "type": "string",
+            "example": "Vitor Valentim"
+          },
+          "senha": {
+            "type": "number",
+            "example": 12345
+          }
+        }
+      }
+    },
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
