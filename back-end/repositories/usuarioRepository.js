@@ -37,6 +37,15 @@ export default class UsuarioRepository extends BaseRepository{
     return rows.length > 0
   }
 
+  async validarAcesso(email, senha){
+    let sql = "SELECT * FROM tb_usuario WHERE usu_email = ? AND usu_senha = ?"
+    let valores = [email, senha]
+    let row = await this.db.ExecutaComando(sql, valores)
+    if(!row || row.length === 0){ return null }
+    
+    return this.toMap(row[0])
+  }
+
   toMap(rows){
     if(rows && typeof rows.length == "number"){
       let lista = []

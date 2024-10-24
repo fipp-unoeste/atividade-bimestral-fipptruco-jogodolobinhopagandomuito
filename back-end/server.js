@@ -5,6 +5,7 @@ import { createRequire } from "module"
 const require = createRequire(import.meta.url)
 const outputJson = require("./swagger-output.json")
 import cors from 'cors'
+import routerAutenticacao from './routes/autenticacaoRoute.js'
 import routerUsuarios from './routes/usuarioRoute.js'
 
 const app = express()
@@ -15,6 +16,7 @@ app.use(cookieParser())
 
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(outputJson))
 
+app.use("/auth", routerAutenticacao)
 app.use("/usuarios", routerUsuarios)
 
 app.listen(5000, function() {

@@ -1,9 +1,10 @@
+'use client'
+
 import styled from "styled-components"
 import Input, { InputProps } from "../Input"
 import Link from "next/link"
 import { useState } from "react"
-import axios from "axios"
-import { useRouter } from "next/navigation"
+import { useDadosUsuarioContext } from "@/app/contexts/useContext"
 
 const SectionEstilizado = styled.section`
   display: flex;
@@ -72,19 +73,19 @@ const ErrorMessage = styled.span`
 `;
 
 interface FormularioProps{
-  titulo: string; 
-  inputs: InputProps[]; 
-  linkUrl: string;
+  titulo: string
+  inputs: InputProps[]
+  linkUrl: string
   linkTexto: {
-    pergunta: string; 
-    resposta: string;
-  };
-  textoSubmit: string;
+    pergunta: string
+    resposta: string
+  }
+  textoSubmit: string
 }
 
 export default function Formulario({ titulo, inputs, linkUrl, linkTexto, textoSubmit }: FormularioProps): JSX.Element{
-  const [mensagemErro, setMensagemErro] = useState<string | null>(null)
-  const router = useRouter()
+  const { autenticarUsuario, mensagemErro, setMensagemErro } = useDadosUsuarioContext()
+  
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -92,9 +93,11 @@ export default function Formulario({ titulo, inputs, linkUrl, linkTexto, textoSu
     const formData = new FormData(event.currentTarget)
 
     const nome = formData.get("nome") as string
-    if(nome.length < 6){
-      setMensagemErro("O nome deve ter pelo menos 6 caracteres.")
-      return
+    if(textoSubmit == "Cadastrar"){
+      if(nome.length < 6){
+        setMensagemErro("O nome deve ter pelo menos 6 caracteres.")
+        return
+      }
     }
 
     const email = formData.get("email") as string
@@ -105,31 +108,27 @@ export default function Formulario({ titulo, inputs, linkUrl, linkTexto, textoSu
 
     const senha = formData.get("senha") as string
     if(senha.length < 6){
-      setMensagemErro("O senha deve ter pelo menos 6 caracteres.")
+      setMensagemErro("A senha deve ter pelo menos 6 caracteres.")
       return
     }
 
     setMensagemErro(null)
 
     const dados = {
-      nome: formData.get("nome"),
-      email: formData.get("email"),
-      senha: formData.get("senha"),
+      nome: formData.get("nome") as string | undefined,
+      email: formData.get("email") as string | undefined,
+      senha: formData.get("senha") as string | undefined,
     }
 
-    try {
-      const response = await axios.post("http://localhost:5000/usuarios/", dados)
-      console.log('Dados enviados com sucesso:', response.data)
-
-      setMensagemErro(null)
-      router.push('/')
-    } 
-    catch(error: unknown){
-      console.error("Erro:", error)
-
-      if(axios.isAxiosError(error)){ setMensagemErro(error.response?.data?.msg || 'Erro ao enviar os dados. Tente novamente mais tarde.') } 
-      else{ setMensagemErro('Erro desconhecido. Tente novamente.') }
+    if (textoSubmit !== "Cadastrar" && textoSubmit !== "Entrar") {
+      setMensagemErro("Tipo de ação inválido.");
+      return;
     }
+  
+    const tipo = textoSubmit as "Cadastrar" | "Entrar";
+
+    await autenticarUsuario(dados, tipo)
+    
   }
 
   return(

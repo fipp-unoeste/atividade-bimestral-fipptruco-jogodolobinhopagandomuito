@@ -34,7 +34,6 @@ export default class UsuarioController{
 
       if(nome && email && senha){
         let repo = new UsuarioRepository()
-
         let emailExistente = await repo.verificarEmailExistente(email)
         
         if(emailExistente){
@@ -43,7 +42,6 @@ export default class UsuarioController{
         }
 
         let entidade = new UsuarioEntity(0, nome, email, senha)
-        
         let result = await repo.gravar(entidade)
 
         if(result){ res.status(201).json({ msg: "Usuário gravado com sucesso!" }) }
@@ -52,6 +50,24 @@ export default class UsuarioController{
       else{
         res.status(400).json({ msg: "Parâmetros não informados corretamente!" })
       }
+    }
+    catch(ex){
+      console.error('Erro ao gravar usuário:', ex); 
+      res.status(500).json({ msg: ex.message })
+    }
+  }
+
+  async entrar(req, res){
+    try{
+      const {email, senha} = req.body
+
+      if(!email || !senha){ return res.status(400).json({ msg: "E-mail e senha são obrigatórios." }) }
+
+      let repo = new UsuarioRepository()
+      const usuario = await repo.validarAcesso(email, senha)
+      
+      if(usuario){ res.status(200).json({ msg: "Login realizado com sucesso!", usuario }) } 
+      else{ res.status(401).json({ msg: "E-mail ou senha incorretos." }) }
     }
     catch(ex){
       res.status(500).json({ msg: ex.message })

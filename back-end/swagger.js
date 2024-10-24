@@ -9,7 +9,7 @@ const doc = {
   host: 'localhost:5000',
   components: {
     schemas: {
-        usuarioModel: new UsuarioEntity(0, "vitorvalentin840@gmail.com", "Vitor Valentim", 12345).toJSON()
+        usuarioModel: new UsuarioEntity(0, "Vitor Valentim", "vitorvalentin840@gmail.com", 12345).toJSON()
     },
     securitySchemes:{
       bearerAuth: {
