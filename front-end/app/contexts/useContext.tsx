@@ -9,9 +9,14 @@ export const useAutenticacaoContext = () => {
   return useContext(Contexts.AutenticacaoContext)
 }
 
+export const useDadosSalaContext = () => {
+  return useContext(Contexts.DadosSalaContext)
+}
+
 const useContexts = {
   useDadosUsuarioContext,
-  useAutenticacaoContext
+  useAutenticacaoContext,
+  useDadosSalaContext
 }
 
 export default useContexts

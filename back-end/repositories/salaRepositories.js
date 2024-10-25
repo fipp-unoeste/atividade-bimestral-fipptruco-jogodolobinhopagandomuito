@@ -23,9 +23,10 @@ export default class SalaRepository extends BaseRepository{
   async gravar(entidade){
     let sql = "INSERT INTO tb_sala (sal_nome, usu_id) VALUES (?, ?)"
     let valores = [entidade.nome, entidade.usuarioId]
-    let result = await this.db.ExecutaComandoNonQuery(sql, valores)
-    
-    return result
+    let insertId = await this.db.ExecutaComandoLastInserted(sql, valores)
+
+    if(insertId){ return await this.obter(insertId) } 
+    else{ return null }
   }
  
   toMap(rows){

@@ -43,7 +43,7 @@ export default class SalaController{
         let entidade = new SalaEntity(0, nome, usuarioId)
         let result = await repo.gravar(entidade)
 
-        if(result){ res.status(201).json({ msg: "Sala gravado com sucesso!" }) }
+        if(result){ res.status(201).json({ msg: "Sala gravado com sucesso!", sala: result }) }
         else{ throw new Error("Erro ao inserir o usuário no banco de dados") }
       }
       else{

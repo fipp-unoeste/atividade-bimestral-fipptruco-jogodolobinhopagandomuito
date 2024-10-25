@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import useContexts from "../Context"
 import { DadosUsuario } from "../Context"
 import axios from "axios"

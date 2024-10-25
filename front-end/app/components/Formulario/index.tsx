@@ -3,7 +3,7 @@
 import styled from "styled-components"
 import Input, { InputProps } from "../Input"
 import Link from "next/link"
-import { useDadosUsuarioContext } from "@/app/contexts/useContext"
+import { useDadosSalaContext, useDadosUsuarioContext } from "@/app/contexts/useContext"
 
 const SectionEstilizado = styled.section`
   display: flex;
@@ -84,50 +84,68 @@ interface FormularioProps{
 }
 
 export default function Formulario({ titulo, inputs, linkUrl, linkTexto, textoSubmit, texto }: FormularioProps): JSX.Element{
-  const { autenticarUsuario, mensagemErro, setMensagemErro } = useDadosUsuarioContext()
+  const { autenticarUsuario, mensagemErro, setMensagemErro, usuario } = useDadosUsuarioContext()
+  const { cadastroSala } = useDadosSalaContext()
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     const formData = new FormData(event.currentTarget)
+    
+    if(textoSubmit == "Cadastrar" || textoSubmit == "Entrar"){
+      const nome = formData.get("nome") as string
+      if(textoSubmit == "Cadastrar"){
+        if(nome.length < 6){
+          setMensagemErro("O nome deve ter pelo menos 6 caracteres.")
+          return
+        }
+      }
 
-    const nome = formData.get("nome") as string
-    if(textoSubmit == "Cadastrar"){
-      if(nome.length < 6){
-        setMensagemErro("O nome deve ter pelo menos 6 caracteres.")
+      const email = formData.get("email") as string
+      if(!email.includes("@")){
+        setMensagemErro("O email deve ser válido.")
         return
       }
-    }
 
-    const email = formData.get("email") as string
-    if(!email.includes("@")){
-      setMensagemErro("O email deve ser válido.")
-      return
-    }
+      const senha = formData.get("senha") as string
+      if(senha.length < 6){
+        setMensagemErro("A senha deve ter pelo menos 6 caracteres.")
+        return
+      }
 
-    const senha = formData.get("senha") as string
-    if(senha.length < 6){
-      setMensagemErro("A senha deve ter pelo menos 6 caracteres.")
-      return
-    }
+      setMensagemErro(null)
 
-    setMensagemErro(null)
+      const dados = {
+        nome: formData.get("nome") as string | undefined,
+        email: formData.get("email") as string | undefined,
+        senha: formData.get("senha") as string | undefined,
+      }
 
-    const dados = {
-      nome: formData.get("nome") as string | undefined,
-      email: formData.get("email") as string | undefined,
-      senha: formData.get("senha") as string | undefined,
-    }
-
-    if (textoSubmit !== "Cadastrar" && textoSubmit !== "Entrar") {
-      setMensagemErro("Tipo de ação inválido.");
-      return;
-    }
-  
-    const tipo = textoSubmit as "Cadastrar" | "Entrar";
-
-    await autenticarUsuario(dados, tipo)
+      if(textoSubmit !== "Cadastrar" && textoSubmit !== "Entrar"){
+        setMensagemErro("Tipo de ação inválido.")
+        return
+      }
     
+      const tipo = textoSubmit as "Cadastrar" | "Entrar"
+
+      await autenticarUsuario(dados, tipo)
+    }  
+    else{
+      const nomeSala = formData.get("nomeSala") as string
+      if(nomeSala.length < 5){
+        setMensagemErro("O nome da sala deve ter pelo menos 5 caracteres.")
+        return
+      }
+
+      setMensagemErro(null)
+      
+      const dados = {
+        nome: formData.get("nomeSala") as string | undefined,
+        usuarioId: usuario?.id
+      }
+console.log(dados)
+      cadastroSala(dados)
+    } 
   }
 
   return(
