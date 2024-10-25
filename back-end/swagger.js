@@ -1,5 +1,6 @@
 import swaggerAutogen from "swagger-autogen"
 import UsuarioEntity from "./entities/usuarioEntity.js"
+import SalaEntity from "./entities/salaEntity.js"
 
 const doc = {
   info: {
@@ -9,7 +10,8 @@ const doc = {
   host: 'localhost:5000',
   components: {
     schemas: {
-        usuarioModel: new UsuarioEntity(0, "Vitor Valentim", "vitorvalentin840@gmail.com", 12345).toJSON()
+        usuarioModel: new UsuarioEntity(0, "Vitor Valentim", "vitorvalentin840@gmail.com", 12345).toJSON(),
+        salaModel: new SalaEntity(0, "Sala Truco 1", 1).toJSON()
     },
     securitySchemes:{
       bearerAuth: {

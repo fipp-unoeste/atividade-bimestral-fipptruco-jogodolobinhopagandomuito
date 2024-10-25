@@ -3,6 +3,8 @@
 import Cabecalho from "@/app/components/Cabecalho";
 import OpcoesJogador from "@/app/components/OpcoesJogador";
 import Rodape from "@/app/components/Rodape";
+import { useAutenticacaoContext } from "@/app/contexts/useContext";
+import { useEffect } from "react";
 import styled from "styled-components";
 
 const MainEstilizado = styled.main`
@@ -26,6 +28,10 @@ const SectionEstilizado = styled.section`
 `
 
 export default function AreaDoJogador(){
+  const { acessarPagina } = useAutenticacaoContext()
+
+  useEffect(() => { acessarPagina() }, [acessarPagina])
+
   return(
     <>
       <Cabecalho />

@@ -180,6 +180,84 @@
           }
         }
       }
+    },
+    "/salas/": {
+      "get": {
+        "tags": [
+          "Sala"
+        ],
+        "summary": "Endpoint para retornar todos os sala",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Sala"
+        ],
+        "summary": "Cadastra um sala",
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/salaModel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/salas/{id}": {
+      "get": {
+        "tags": [
+          "Sala"
+        ],
+        "summary": "Retorna um sala baseado em um código",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -202,6 +280,23 @@
           "senha": {
             "type": "number",
             "example": 12345
+          }
+        }
+      },
+      "salaModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 0
+          },
+          "nome": {
+            "type": "string",
+            "example": "Sala Truco 1"
+          },
+          "usuarioId": {
+            "type": "number",
+            "example": 1
           }
         }
       }

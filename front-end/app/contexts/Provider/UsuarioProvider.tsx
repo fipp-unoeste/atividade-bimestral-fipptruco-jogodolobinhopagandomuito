@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import useContexts from "../Context"
 import { DadosUsuario } from "../Context"
 import axios from "axios"
@@ -38,9 +38,13 @@ export const UsuarioProvider = ({ children }: { children: React.ReactNode }) => 
     }
   }
 
+  const acessarPagina = () => {
+    if(!isAutenticado){ router.push('entrar') }
+  }
+
   return (
     <useContexts.DadosUsuarioContext.Provider value={{ usuario, setUsuario, autenticarUsuario, mensagemErro, setMensagemErro }}>
-      <useContexts.AutenticacaoContext.Provider value={{ isAutenticado, setIsAutenticado }}>
+      <useContexts.AutenticacaoContext.Provider value={{ isAutenticado, setIsAutenticado, acessarPagina }}>
         {children}
       </useContexts.AutenticacaoContext.Provider>
     </useContexts.DadosUsuarioContext.Provider>

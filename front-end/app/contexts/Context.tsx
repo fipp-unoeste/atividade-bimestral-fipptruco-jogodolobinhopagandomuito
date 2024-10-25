@@ -11,13 +11,14 @@ interface DadosUsuarioType{
   usuario: DadosUsuario | null
   setUsuario: (usuario: DadosUsuario | null) => void
   autenticarUsuario: (dados: DadosUsuario, tipo: "Cadastrar" | "Entrar") => Promise<void>
-  mensagemErro: string | null,
+  mensagemErro: string | null
   setMensagemErro: (mensagemErro: string | null) => void
 }
 
 interface AutenticacaoContextType {
   isAutenticado: boolean
   setIsAutenticado: (valor: boolean) => void
+  acessarPagina: () => void
 }
 
 const DadosUsuarioContext = createContext<DadosUsuarioType>({
@@ -31,6 +32,7 @@ const DadosUsuarioContext = createContext<DadosUsuarioType>({
 const AutenticacaoContext = createContext<AutenticacaoContextType>({
   isAutenticado: false,
   setIsAutenticado: () => {},
+  acessarPagina: () => {}
 })
 
 DadosUsuarioContext.displayName = "DadosUsuario"

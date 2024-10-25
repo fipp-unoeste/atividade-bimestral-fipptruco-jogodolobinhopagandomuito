@@ -2,9 +2,7 @@ import UsuarioEntity from "../entities/usuarioEntity.js"
 import BaseRepository from "./baseRepository.js"
 
 export default class UsuarioRepository extends BaseRepository{
-  constructor(db){
-    super(db)
-  }
+  constructor(db){ super(db) }
 
   async listar(){
     let sql = "SELECT * FROM tb_usuario"

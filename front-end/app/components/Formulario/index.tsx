@@ -3,7 +3,6 @@
 import styled from "styled-components"
 import Input, { InputProps } from "../Input"
 import Link from "next/link"
-import { useState } from "react"
 import { useDadosUsuarioContext } from "@/app/contexts/useContext"
 
 const SectionEstilizado = styled.section`
@@ -81,11 +80,11 @@ interface FormularioProps{
     resposta: string
   }
   textoSubmit: string
+  texto?: string
 }
 
-export default function Formulario({ titulo, inputs, linkUrl, linkTexto, textoSubmit }: FormularioProps): JSX.Element{
+export default function Formulario({ titulo, inputs, linkUrl, linkTexto, textoSubmit, texto }: FormularioProps): JSX.Element{
   const { autenticarUsuario, mensagemErro, setMensagemErro } = useDadosUsuarioContext()
-  
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -133,7 +132,10 @@ export default function Formulario({ titulo, inputs, linkUrl, linkTexto, textoSu
 
   return(
     <SectionEstilizado>
-      <h2>{titulo}</h2>
+      <div>
+        <h2>{titulo}</h2>
+        <p>{texto}</p>
+      </div>
 
       <form onSubmit={handleSubmit}>
         {inputs.map((input, index) => (

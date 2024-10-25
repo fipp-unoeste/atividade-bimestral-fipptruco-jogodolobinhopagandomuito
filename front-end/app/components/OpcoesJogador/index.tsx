@@ -14,6 +14,11 @@ const DivEstilizada = styled.div`
   text-align: justify;
   padding: 0 35px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.55);
+  transition: transform 0.3s ease;
+
+  &:hover{
+    transform: translateY(-10px);
+  }
 
   #divSvg{
     border-radius: 100%;
