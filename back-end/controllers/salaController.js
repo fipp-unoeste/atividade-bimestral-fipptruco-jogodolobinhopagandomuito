@@ -1,5 +1,5 @@
 import SalaEntity from "../entities/salaEntity.js"
-import SalaRepository from "../repositories/salaRepositories.js"
+import SalaRepository from "../repositories/salaRepository.js"
 import UsuarioRepository from "../repositories/usuarioRepository.js"
 
 export default class SalaController{

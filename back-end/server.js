@@ -8,6 +8,7 @@ import cors from 'cors'
 import routerAutenticacao from './routes/autenticacaoRoute.js'
 import routerUsuarios from './routes/usuarioRoute.js'
 import routerSala from './routes/salaRoute.js'
+import routerEquipe from './routes/equipeRoute.js'
 
 const app = express()
 
@@ -20,6 +21,7 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(outputJson))
 app.use("/auth", routerAutenticacao)
 app.use("/usuarios", routerUsuarios)
 app.use("/salas", routerSala)
+app.use("/equipes", routerEquipe)
 
 app.listen(5000, function() {
   console.log("Servidor Web em Funcionamento!");

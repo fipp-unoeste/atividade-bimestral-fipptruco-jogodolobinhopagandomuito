@@ -1,5 +1,4 @@
 import SalaEntity from '../entities/salaEntity.js'
-import UsuarioEntity from '../entities/usuarioEntity.js'
 import BaseRepository from './baseRepository.js'
 
 export default class SalaRepository extends BaseRepository{

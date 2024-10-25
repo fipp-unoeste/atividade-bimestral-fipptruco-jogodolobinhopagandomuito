@@ -13,10 +13,15 @@ export const useDadosSalaContext = () => {
   return useContext(Contexts.DadosSalaContext)
 }
 
+export const useDadosEquipeContext = () => {
+  return useContext(Contexts.DadosEquipeContext)
+}
+
 const useContexts = {
   useDadosUsuarioContext,
   useAutenticacaoContext,
-  useDadosSalaContext
+  useDadosSalaContext,
+  useDadosEquipeContext
 }
 
 export default useContexts

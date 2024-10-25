@@ -36,6 +36,19 @@ interface DadosSalaType{
   setSalaEscolhida: (salaEscolhida: DadosSala | null) => void
 }
 
+export interface DadosEquipe{
+  id?: number
+  descricao?: string
+}
+
+interface DadosEquipeType{
+  equipes: DadosEquipe[] | null
+  setEquipes: (equipes: DadosEquipe[] | null) => void
+  equipe: DadosEquipe | null
+  setEquipe: (equipe: DadosEquipe | null) => void
+  todasEquipes: () => Promise<void>
+}
+
 const DadosUsuarioContext = createContext<DadosUsuarioType>({
   usuario: null,
   setUsuario: () => {},
@@ -59,14 +72,24 @@ const DadosSalaContext = createContext<DadosSalaType>({
   setSalaEscolhida: () => {}
 })
 
+const DadosEquipeContext = createContext<DadosEquipeType>({
+  equipes: null,
+  setEquipes: () => {},
+  equipe: null,
+  setEquipe: () => {},
+  todasEquipes: async () => {}
+})
+
 DadosUsuarioContext.displayName = "DadosUsuario"
 AutenticacaoContext.displayName = "Autenticacao"
 DadosSalaContext.displayName = "DadosSala"
+DadosEquipeContext.displayName = "DadosEquipe"
 
 const Contexts = {
   DadosUsuarioContext,
   AutenticacaoContext,
-  DadosSalaContext
+  DadosSalaContext,
+  DadosEquipeContext
 };
 
 export default Contexts
