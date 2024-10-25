@@ -7,9 +7,10 @@ import { useRouter } from "next/navigation"
 import { useDadosUsuarioContext } from "../useContext"
 
 export const SalaProvider = ({ children }: { children: React.ReactNode }) => {
-  const [sala, setSala] = useState<DadosSala | null>(null)
+  const [salas, setSalas] = useState<DadosSala[] | null>(null)
   const router = useRouter()
   const { setMensagemErro } = useDadosUsuarioContext()
+  const [salaEscolhida, setSalaEscolhida] = useState<DadosSala | null>(null)
 
   const cadastroSala = async (dados: DadosSala) => {
     try{
@@ -21,8 +22,6 @@ export const SalaProvider = ({ children }: { children: React.ReactNode }) => {
 
       console.log('Dados enviados com sucesso:', response.data)
       
-      setSala(response.data.sala)
-      
       router.push("area-do-jogador")
     } 
     catch(error: unknown){
@@ -33,8 +32,21 @@ export const SalaProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }
 
+  const todasSalas = async () => {
+    try {
+      const url = "http://localhost:5000/salas/"
+      const response = await axios.get(url)
+
+      console.log('Todas as salas:', response.data)
+
+      setSalas(response.data)
+    } catch (error: unknown) {
+      console.error("Erro ao buscar as salas:", error)
+    }
+  }
+
   return(
-    <useContexts.DadosSalaContext.Provider value={{ sala, setSala, cadastroSala }}>
+    <useContexts.DadosSalaContext.Provider value={{ salas, setSalas, cadastroSala, todasSalas, salaEscolhida, setSalaEscolhida }}>
       {children}
     </useContexts.DadosSalaContext.Provider>
   )

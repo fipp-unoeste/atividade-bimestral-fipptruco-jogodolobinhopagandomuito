@@ -28,9 +28,12 @@ export interface DadosSala{
 }
 
 interface DadosSalaType{
-  sala: DadosSala | null
-  setSala: (sala: DadosSala | null) => void
+  salas: DadosSala[] | null
+  setSalas: (sala: DadosSala[] | null) => void
   cadastroSala: (dados: DadosSala) => Promise<void>
+  todasSalas: () => Promise<void>
+  salaEscolhida: DadosSala | null
+  setSalaEscolhida: (salaEscolhida: DadosSala | null) => void
 }
 
 const DadosUsuarioContext = createContext<DadosUsuarioType>({
@@ -48,9 +51,12 @@ const AutenticacaoContext = createContext<AutenticacaoContextType>({
 })
 
 const DadosSalaContext = createContext<DadosSalaType>({
-  sala: null,
-  setSala: () => {},
-  cadastroSala: async () => {}
+  salas: null,
+  setSalas: () => {},
+  cadastroSala: async () => {},
+  todasSalas: async () => {},
+  salaEscolhida: null,
+  setSalaEscolhida: () => {}
 })
 
 DadosUsuarioContext.displayName = "DadosUsuario"

@@ -21,7 +21,7 @@ export default function CriarPagina(){
         <Formulario 
           titulo="Criar Nova Sala"
           inputs={inputs}
-          linkUrl=""
+          linkUrl="area-do-jogador"
           linkTexto={{ pergunta: "", resposta: "Voltar para a área do jogador" }}
           textoSubmit="Criar Sala"
           texto="Digite um nome para sua sala de truco"

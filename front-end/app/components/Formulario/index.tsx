@@ -143,7 +143,7 @@ export default function Formulario({ titulo, inputs, linkUrl, linkTexto, textoSu
         nome: formData.get("nomeSala") as string | undefined,
         usuarioId: usuario?.id
       }
-console.log(dados)
+      
       cadastroSala(dados)
     } 
   }
