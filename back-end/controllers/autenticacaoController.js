@@ -17,7 +17,7 @@ export default class AutenticacaoController{
           res.cookie("token", token, {
             httpOnly: true
           })
-          res.status(200).json({ token: token })
+          res.status(200).json({ token: token, usuario: usuario })
         }
         else{
           res.status(404).json({ msg: "Credenciais inválidas!" })

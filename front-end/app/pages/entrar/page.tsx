@@ -1,9 +1,8 @@
 'use client'
 
-import Cabecalho from "@/app/components/Cabecalho"
 import Formulario from "@/app/components/Formulario"
-import Rodape from "@/app/components/Rodape"
 import { MainEstilizado } from "../cadastrar/page"
+import PaginaBase from "@/app/pageBase"
 
 export default function Entrar(){
   const inputs = [
@@ -12,8 +11,7 @@ export default function Entrar(){
   ]
 
   return(
-    <>
-      <Cabecalho />
+    <PaginaBase>
 
       <MainEstilizado>
         <Formulario 
@@ -25,7 +23,6 @@ export default function Entrar(){
         />
       </MainEstilizado>
 
-      <Rodape />
-    </>
+    </PaginaBase>
   )
 }

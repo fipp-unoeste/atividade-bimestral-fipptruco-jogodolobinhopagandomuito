@@ -1,8 +1,7 @@
 'use client'
 
-import Cabecalho from "@/app/components/Cabecalho"
 import Formulario from "@/app/components/Formulario"
-import Rodape from "@/app/components/Rodape"
+import PaginaBase from "@/app/pageBase"
 import styled from "styled-components"
 
 export const MainEstilizado = styled.main`
@@ -23,8 +22,7 @@ export default function Cadastrar(){
   ]
 
   return(
-    <>
-      <Cabecalho />
+    <PaginaBase>
 
       <MainEstilizado>
         <Formulario 
@@ -36,7 +34,6 @@ export default function Cadastrar(){
         />
       </MainEstilizado>
 
-      <Rodape />
-    </>
+    </PaginaBase>
   )
 }

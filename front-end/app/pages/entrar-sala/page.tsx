@@ -1,9 +1,8 @@
 'use client'
 
-import Cabecalho from "@/app/components/Cabecalho";
 import CamposSalaPesquisa from "@/app/components/CampoSalasPesquisa";
-import Rodape from "@/app/components/Rodape";
 import SalasDisponiveis from "@/app/components/SalasDisponiveis";
+import PaginaBase from "@/app/pageBase";
 import styled from "styled-components";
 
 const MainEstilizado = styled.main`
@@ -18,8 +17,7 @@ const MainEstilizado = styled.main`
 
 export default function EntrarSala(){
   return(
-    <>
-      <Cabecalho />
+    <PaginaBase>
 
       <MainEstilizado>
         <CamposSalaPesquisa />
@@ -27,7 +25,6 @@ export default function EntrarSala(){
         <SalasDisponiveis />
       </MainEstilizado>
     
-      <Rodape />
-    </>
+    </PaginaBase>
   )
 }

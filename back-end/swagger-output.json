@@ -141,46 +141,6 @@
         ]
       }
     },
-    "/usuarios/entrar": {
-      "post": {
-        "tags": [
-          "Usuário"
-        ],
-        "summary": "Entrar em uma conta de um usuário",
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "example": "any"
-                  },
-                  "senha": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/salas/": {
       "get": {
         "tags": [

@@ -6,8 +6,8 @@ export default class UsuarioController{
     try{
       let usuario = new UsuarioRepository()
       let lista = await usuario.listar()
-      
-      res.status(200).json(lista)
+
+      res.status(200).json({lista, usuarioLogado: req.usuarioLogado})
     }
     catch(ex){
       res.status(500).json({ msg: ex.message })
@@ -53,23 +53,6 @@ export default class UsuarioController{
     }
     catch(ex){
       console.error('Erro ao gravar usuário:', ex); 
-      res.status(500).json({ msg: ex.message })
-    }
-  }
-
-  async entrar(req, res){
-    try{
-      const {email, senha} = req.body
-
-      if(!email || !senha){ return res.status(400).json({ msg: "E-mail e senha são obrigatórios." }) }
-
-      let repo = new UsuarioRepository()
-      const usuario = await repo.validarAcesso(email, senha)
-      
-      if(usuario){ res.status(200).json({ msg: "Login realizado com sucesso!", usuario }) } 
-      else{ res.status(401).json({ msg: "E-mail ou senha incorretos." }) }
-    }
-    catch(ex){
       res.status(500).json({ msg: ex.message })
     }
   }

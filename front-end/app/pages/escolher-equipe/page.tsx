@@ -1,10 +1,8 @@
 'use client'
 
-import Cabecalho from "@/app/components/Cabecalho";
 import CampoEquipe from "@/app/components/CampoEquipe";
-import Rodape from "@/app/components/Rodape";
 import { useDadosEquipeContext } from "@/app/contexts/useContext";
-import Link from "next/link";
+import PaginaBase from "@/app/pageBase";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -72,9 +70,7 @@ export default function EscolherEquipe(){
   }
 
   return(
-    <>
-      <Cabecalho />
-
+    <PaginaBase>
       <MainEstilizado>
         <SectionEstilizado>
           <h2>Escolha sua Equipe</h2>
@@ -99,8 +95,6 @@ export default function EscolherEquipe(){
           </button>
         </SectionEstilizado>
       </MainEstilizado>      
-
-      <Rodape />
-    </>
+    </PaginaBase>
   )
 }

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import styled from "styled-components";
+import CampoNav from "../CampoNav";
+import { useAutenticacaoContext } from "@/app/contexts/useContext";
 
 const HeaderEstilizado = styled.header`
   display: flex;
@@ -19,26 +21,48 @@ const NavEstilizada = styled.nav`
   align-items: center;
   justify-content: center;
   gap: 50px;
-
-  p{
-    font-size: 20px;
-  }
 `
 
-export default function Cabecalho(){
+interface CabecalhoProps{
+  titulo: string
+}
+
+export default function Cabecalho({ titulo }: CabecalhoProps): JSX.Element{
+  const { isAutenticado, logout } = useAutenticacaoContext()
+
   return(
     <HeaderEstilizado>
       <Link href="/">
-        <h2>FIPPTruco</h2>
+        <h2>{titulo}</h2>
       </Link>
 
       <NavEstilizada>
-        <Link href="/">
-          <p>Como Jogar</p>
-        </Link>
-        <Link href="/">
-          <p>Sobre</p>
-        </Link>
+        <CampoNav 
+          texto="Como Jogar"
+          link="/"
+        />    
+
+        <CampoNav 
+          texto="Sobre"
+          link="/"
+        />
+
+        {isAutenticado ? (
+          <>
+            <CampoNav 
+              texto="Área do Jogador"
+              link="/pages/area-do-jogador"
+              estilo="areaJogador"
+            />
+
+            <CampoNav 
+              texto="Sair"
+              link="/"
+              estilo="sair"
+              onClick={logout}
+            />
+          </>
+        ) : null}
       </NavEstilizada>
     </HeaderEstilizado>
   )

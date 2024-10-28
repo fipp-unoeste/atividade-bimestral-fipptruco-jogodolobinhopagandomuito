@@ -1,9 +1,8 @@
 'use client'
 
-import Cabecalho from "@/app/components/Cabecalho";
 import OpcoesJogador from "@/app/components/OpcoesJogador";
-import Rodape from "@/app/components/Rodape";
 import { useAutenticacaoContext } from "@/app/contexts/useContext";
+import PaginaBase from "@/app/pageBase";
 import { useEffect } from "react";
 import styled from "styled-components";
 
@@ -33,8 +32,7 @@ export default function AreaDoJogador(){
   useEffect(() => { acessarPagina() }, [acessarPagina])
 
   return(
-    <>
-      <Cabecalho />
+    <PaginaBase>
 
       <MainEstilizado>
         <h2>Área do Jogador</h2>
@@ -69,7 +67,6 @@ export default function AreaDoJogador(){
         </SectionEstilizado>
       </MainEstilizado>
 
-      <Rodape />
-    </>
+    </PaginaBase>
   )
 }

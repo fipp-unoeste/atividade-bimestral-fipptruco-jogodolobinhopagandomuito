@@ -13,10 +13,14 @@ const FooterEstilizado = styled.footer`
   }
 `
 
-export default function Rodape(){
+interface RodapeProps{
+  texto: string
+}
+
+export default function Rodape({ texto }: RodapeProps): JSX.Element{
   return(
     <FooterEstilizado>
-      <p>© 2024 FIPPTruco. Todos os direitos reservados.</p>
+      <p>{texto}</p>
     </FooterEstilizado>
   )
 }

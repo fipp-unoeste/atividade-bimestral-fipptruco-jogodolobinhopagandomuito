@@ -1,11 +1,10 @@
 'use client'
 
-import Cabecalho from "@/app/components/Cabecalho";
 import Formulario from "@/app/components/Formulario";
-import Rodape from "@/app/components/Rodape";
 import { MainEstilizado } from "../cadastrar/page";
 import { useAutenticacaoContext } from "@/app/contexts/useContext";
 import { useEffect } from "react";
+import PaginaBase from "@/app/pageBase";
 
 export default function CriarPagina(){
   const inputs = [{ tipo: "text", obrigatorio: true, placeholder: "Digite o nome da sala...", nomeInput: "nomeSala", nomeLabel: "Nome da Sala" }]
@@ -14,8 +13,7 @@ export default function CriarPagina(){
   useEffect(() => { acessarPagina() }, [acessarPagina])
 
   return(
-    <>
-      <Cabecalho />
+    <PaginaBase>
 
       <MainEstilizado>
         <Formulario 
@@ -28,7 +26,6 @@ export default function CriarPagina(){
         />
       </MainEstilizado>
 
-      <Rodape />
-    </>
+    </PaginaBase>
   )
 }

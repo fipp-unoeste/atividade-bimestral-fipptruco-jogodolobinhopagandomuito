@@ -19,6 +19,7 @@ interface AutenticacaoContextType{
   isAutenticado: boolean
   setIsAutenticado: (valor: boolean) => void
   acessarPagina: () => void
+  logout: () => void
 }
 
 export interface DadosSala{
@@ -60,7 +61,8 @@ const DadosUsuarioContext = createContext<DadosUsuarioType>({
 const AutenticacaoContext = createContext<AutenticacaoContextType>({
   isAutenticado: false,
   setIsAutenticado: () => {},
-  acessarPagina: () => {}
+  acessarPagina: () => {},
+  logout: () => {}
 })
 
 const DadosSalaContext = createContext<DadosSalaType>({

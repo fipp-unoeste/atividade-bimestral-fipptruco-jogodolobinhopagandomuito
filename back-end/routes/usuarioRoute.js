@@ -47,11 +47,4 @@ router.post("/", (req, res) => {
   ctrl.gravar(req, res)
 })
 
-router.post("/entrar", (req, res) => {
-  //#swagger.tags = ['Usuário']
-  //#swagger.summary = 'Entrar em uma conta de um usuário'
-
-  ctrl.entrar(req, res)
-})
-
 export default router
