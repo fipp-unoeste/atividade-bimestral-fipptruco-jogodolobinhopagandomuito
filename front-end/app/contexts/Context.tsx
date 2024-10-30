@@ -13,6 +13,7 @@ interface DadosUsuarioType{
   autenticarUsuario: (dados: DadosUsuario, tipo: "Cadastrar" | "Entrar") => Promise<void>
   mensagemErro: string | null
   setMensagemErro: (mensagemErro: string | null) => void
+  alterarDadosUsuario: (dados: DadosUsuario, tipo: "TodosDados" | "AlgumDado") => Promise<void>
 }
 
 interface AutenticacaoContextType{
@@ -55,7 +56,8 @@ const DadosUsuarioContext = createContext<DadosUsuarioType>({
   setUsuario: () => {},
   autenticarUsuario: async () => {},
   mensagemErro: null,
-  setMensagemErro: () => {}
+  setMensagemErro: () => {},
+  alterarDadosUsuario: async () => {}
 })
 
 const AutenticacaoContext = createContext<AutenticacaoContextType>({

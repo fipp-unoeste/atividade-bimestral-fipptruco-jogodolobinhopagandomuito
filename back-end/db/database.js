@@ -8,11 +8,11 @@ export default class Database{
 
   constructor(){
     this.#conexao = mysql.createPool({
-        host: "junction.proxy.rlwy.net",
-        port: 54093,
+        host: "database-1.cdqoimge4duz.us-east-1.rds.amazonaws.com",
+        port: 3306,
         database: "projeto_truco",
-        user: "root",
-        password: "nupqKZqhHbpxvQKcealEQkLglSCQFhyN"
+        user: "admin",
+        password: "valentim123"
     })
   }
 

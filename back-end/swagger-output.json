@@ -101,6 +101,65 @@
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Usuário"
+        ],
+        "summary": "Altera um usuário",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/usuarioModel"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Usuário"
+        ],
+        "summary": "Realiza a alteração parcial do usuário",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/usuarioModel"
+              }
+            }
+          }
+        }
       }
     },
     "/usuarios/{id}": {

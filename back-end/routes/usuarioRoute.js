@@ -47,4 +47,40 @@ router.post("/", (req, res) => {
   ctrl.gravar(req, res)
 })
 
+router.put("/", (req, res) => {
+  //#swagger.tags = ['Usuário']
+  //#swagger.summary = 'Altera um usuário'
+  /*  #swagger.requestBody = {
+          required: true,
+          content: {
+              "application/json": {
+                  schema: {
+                      $ref: "#/components/schemas/usuarioModel"
+                  }  
+              }
+          }
+      } 
+  */
+
+  ctrl.alterar(req, res)
+})
+
+router.patch("/", (req, res) => {
+  //#swagger.tags = ['Usuário']
+  //#swagger.summary = 'Realiza a alteração parcial do usuário'
+      /*  #swagger.requestBody = {
+          required: true,
+          content: {
+              "application/json": {
+                  schema: {
+                      $ref: "#/components/schemas/usuarioModel"
+                  }  
+              }
+          }
+      } 
+  */
+
+  ctrl.alteracaoParcial(req, res)
+})
+
 export default router

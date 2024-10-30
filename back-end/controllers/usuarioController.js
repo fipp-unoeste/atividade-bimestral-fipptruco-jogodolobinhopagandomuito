@@ -5,9 +5,9 @@ export default class UsuarioController{
   async listar(req, res){
     try{
       let usuario = new UsuarioRepository()
-      let lista = await usuario.listar()
+      let todosUsuarios = await usuario.listar()
 
-      res.status(200).json({lista, usuarioLogado: req.usuarioLogado})
+      res.status(200).json({todosUsuarios, usuarioLogado: req.usuarioLogado})
     }
     catch(ex){
       res.status(500).json({ msg: ex.message })
@@ -53,6 +53,55 @@ export default class UsuarioController{
     }
     catch(ex){
       console.error('Erro ao gravar usuário:', ex); 
+      res.status(500).json({ msg: ex.message })
+    }
+  }
+
+  async alterar(req, res){
+    try{
+      let {id, nome, email, senha} = req.body
+
+      if(id && nome && email && senha){
+        let entidade = new UsuarioEntity(id, nome, email, senha)
+        let repo = new UsuarioRepository()
+
+        if(await repo.obter(id)){
+          let usuarioAtualizado = await repo.alterar(entidade)
+
+          if(usuarioAtualizado){ res.status(200).json({ msg: "Alteração realizada com sucesso!", usuario: usuarioAtualizado }) }
+          else{ throw new Error("Erro ao executar o comando update!") }
+        }
+        else{
+          res.status(404).json({ msg: "Usuário não encontrado para alteração" })
+        }
+      }
+      else{
+        res.status(400).json({ msg: "Informe os parâmetros corretamente!" })
+      }
+    }
+    catch(ex){
+      res.status(500).json({ msg: ex.message })
+    }
+  }
+
+  async alteracaoParcial(req, res){
+    try{
+      let {id, nome, email, senha} = req.body
+
+      if(id && (nome || email || senha)){
+        let entidade = new UsuarioEntity(id, nome, email, senha)
+
+        let repo = new UsuarioRepository()
+        let usuarioAtualizado = await repo.alteracaoParcial(entidade)
+
+        if(usuarioAtualizado){ res.status(200).json({ msg: "Alteração parcial realizada com sucesso!", usuario: usuarioAtualizado }) }
+        else{ throw new Error("Erro ao executar a atualização no banco de dados") }
+      }
+      else{
+        res.status(400).json({ msg: "Informe os parâmetros corretamente!" })
+      }
+    }
+    catch(ex){
       res.status(500).json({ msg: ex.message })
     }
   }

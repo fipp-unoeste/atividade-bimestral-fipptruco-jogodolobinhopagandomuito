@@ -44,6 +44,30 @@ export default class UsuarioRepository extends BaseRepository{
     return this.toMap(row[0])
   }
 
+  async alterar(entidade){
+    let sql = "UPDATE tb_usuario SET usu_nome = ?, usu_email = ?, usu_senha = ? WHERE usu_id = ?"
+    let valores = [entidade.nome, entidade.email, entidade.senha, entidade.id]
+    let result = await this.db.ExecutaComandoNonQuery(sql, valores)
+    
+    if (result) {
+      return await this.obter(entidade.id);
+    }
+  
+    return null;
+  }
+
+  async alteracaoParcial(entidade){
+    let sql = "UPDATE tb_usuario SET usu_nome = coalesce(?, usu_nome), usu_email = coalesce(?, usu_email), usu_senha = coalesce(?, usu_senha) WHERE usu_id = ?"
+    let valores = [entidade.nome, entidade.email, entidade.senha, entidade.id]
+    let result = await this.db.ExecutaComandoNonQuery(sql, valores)
+
+    if (result) {
+      return await this.obter(entidade.id);
+    }
+  
+    return null;
+  }
+
   toMap(rows){
     if(rows && typeof rows.length == "number"){
       let lista = []
