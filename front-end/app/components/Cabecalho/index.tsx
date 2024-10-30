@@ -39,12 +39,12 @@ export default function Cabecalho({ titulo }: CabecalhoProps): JSX.Element{
       <NavEstilizada>
         <CampoNav 
           texto="Como Jogar"
-          link="/"
+          link="/pages/como-jogar"
         />    
 
         <CampoNav 
           texto="Sobre"
-          link="/"
+          link="/pages/sobre"
         />
 
         {isAutenticado ? (

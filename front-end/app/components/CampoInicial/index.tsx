@@ -74,12 +74,12 @@ const Button = styled.button<LogadoProps>`
 interface CampoInicialProps {
   titulo: string;
   subTitulo: string;
-  tituloBotao1: string;
+  tituloBotao1?: string;
   subTituloBotao1?: string;
-  linkBotao1: string;
-  tituloBotao2: string;
+  linkBotao1?: string;
+  tituloBotao2?: string;
   subTituloBotao2?: string;
-  linkBotao2: string;
+  linkBotao2?: string;
   isLogado?: boolean;
 }
 
@@ -100,19 +100,23 @@ export default function CampoInicial({
       <p>{subTitulo}</p>
 
       <DivEstilizada $isLogado={isLogado}>
-        <Link href={linkBotao1}>
-          <Button $isLogado={isLogado} id="botaoCriarConta">
-            <span className="tituloBotao">{tituloBotao1}</span>
-            <span>{subTituloBotao1}</span>
-          </Button>
-        </Link>
+        {linkBotao1 && (
+          <Link href={linkBotao1}>
+            <Button $isLogado={isLogado} id="botaoCriarConta">
+              <span className="tituloBotao">{tituloBotao1}</span>
+              <span>{subTituloBotao1}</span>
+            </Button>
+          </Link>
+        )}
 
-        <Link href={linkBotao2}>
-          <Button $isLogado={isLogado}>
-            <span className="tituloBotao">{tituloBotao2}</span>
-            <span>{subTituloBotao2}</span>
-          </Button>
-        </Link>
+        {linkBotao2 && (
+          <Link href={linkBotao2}>
+            <Button $isLogado={isLogado}>
+              <span className="tituloBotao">{tituloBotao2}</span>
+              <span>{subTituloBotao2}</span>
+            </Button>
+          </Link>
+        )}
       </DivEstilizada>
     </SectionEstilizado>
   );

@@ -6,6 +6,7 @@ const SectionEstilizado = styled.section`
   justify-content: center;
   gap: 150px;
   height: 400px;
+  background-color: #FFF;
 `;
 
 const DivEstilizada = styled.div`

@@ -3,6 +3,8 @@
 import CampoInicial from "./components/CampoInicial";
 import InformacoesDoSite from "./components/InformacoesDoSite";
 import JogueAgora from "./components/JogueAgora";
+import JogueOndeQuiser from "./components/JogueOndeQuiser";
+import PorqueFIPPTruco from "./components/PorqueFIPPTruco";
 import { useAutenticacaoContext } from "./contexts/useContext";
 import PaginaBase from "./pageBase";
 
@@ -22,10 +24,6 @@ export default function HomePage() {
               linkBotao1="pages/cadastrar"
               linkBotao2="pages/entrar"
             />
-
-            <InformacoesDoSite />
-
-            <JogueAgora />
           </>
         ) : (
           <>
@@ -40,10 +38,16 @@ export default function HomePage() {
               linkBotao2="pages/entrar-sala"
               isLogado={true}
             />
-
-            <InformacoesDoSite />
           </>
         )}
+
+        <InformacoesDoSite />
+
+        <PorqueFIPPTruco />
+        
+        <JogueOndeQuiser />
+
+        {!isAutenticado ? <JogueAgora /> : null}
       </main>
     </PaginaBase>
   );
