@@ -12,21 +12,27 @@ const SectionEstilizado = styled.section`
     transparent 1px
   );
   background-size: 20px 20px;
-  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 40px;
   color: white;
-  padding: 100px 0;
+  padding: 100px 20px;
+  text-align: center;
 
   h1 {
-    font-size: 52px;
+    font-size: 36px;
+    @media (min-width: 768px) {
+      font-size: 52px;
+    }
   }
 
   p {
-    font-size: 22px;
+    font-size: 18px;
+    @media (min-width: 768px) {
+      font-size: 22px;
+    }
   }
 `;
 
@@ -35,7 +41,9 @@ const DivEstilizada = styled.div<LogadoProps>`
   flex-direction: ${({ $isLogado }) => ($isLogado ? "column" : "row")};
   align-items: center;
   justify-content: center;
-  gap: 50px;
+  gap: ${({ $isLogado }) => ($isLogado ? "20px" : "50px")};
+  width: 100%;
+  max-width: 600px;
 
   :hover {
     border-radius: 10px;
@@ -61,13 +69,21 @@ const Button = styled.button<LogadoProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: ${({ $isLogado }) => ($isLogado ? "10px" : "0px")};
-  font-size: 15px;
+  gap: ${({ $isLogado }) => ($isLogado ? "10px" : "5px")};
+  font-size: ${({ $isLogado }) => ($isLogado ? "20px" : "16px")};
+  text-align: justify;
+
+  @media (max-width: 600px) {
+    font-size: ${({ $isLogado }) => ($isLogado ? "14px" : "15px")};
+  }
 
   .tituloBotao {
-    font-size: ${({ $isLogado }) => ($isLogado ? "30px" : "18px")};
+    font-size: ${({ $isLogado }) => ($isLogado ? "28px" : "18px")};
     font-weight: 600;
+
+    @media (max-width: 600px) {
+      font-size: ${({ $isLogado }) => ($isLogado ? "24px" : "15px")};
+    }
   }
 `;
 

@@ -8,7 +8,7 @@ const DivEstilizada = styled.div`
   gap: 20px;
   background-color: #fff;
   border-radius: 14px;
-  width: 14%;
+  width: 20%; 
   padding: 30px 0;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.35);
   transition: transform 0.3s ease;
@@ -32,12 +32,30 @@ const DivEstilizada = styled.div`
 
     h5 {
       font-size: 19px;
+      text-align: center; 
     }
 
     p {
       font-size: 15px;
       font-weight: 100;
+      text-align: center;
     }
+  }
+
+  @media (max-width: 1024px) {
+    width: 30%; 
+    padding: 20px 0; 
+  }
+
+  @media (max-width: 768px) {
+    width: 45%;
+    padding: 15px 0; 
+  }
+
+  @media (max-width: 480px) {
+    width: 85%; 
+    padding: 10px 0; 
+    gap: 15px; 
   }
 `;
 
@@ -67,7 +85,6 @@ export default function CampoLugaresJogar({
 
       <div>
         <h5>{titulo}</h5>
-
         <p>{texto}</p>
       </div>
     </DivEstilizada>

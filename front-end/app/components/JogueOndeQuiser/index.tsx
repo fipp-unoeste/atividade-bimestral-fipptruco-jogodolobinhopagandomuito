@@ -9,17 +9,33 @@ export const SectionEstilizado = styled.section`
   gap: 60px;
   width: 100%;
   padding: 75px 0;
-  background-color: #FFF;
+  background-color: #fff;
 
   h3 {
     font-size: 35px;
+    text-align: center;
+
+    @media (max-width: 768px) {
+      font-size: 28px;
+    }
   }
 
   #todasDivs {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
     width: 80%;
+
+    @media (max-width: 1124px) {
+      width: 90%;
+      gap: 20px;
+    }
+
+    @media (max-width: 800px) {
+      flex-direction: column;
+      gap: 30px;
+      width: 100%;
+    }
   }
 `;
 

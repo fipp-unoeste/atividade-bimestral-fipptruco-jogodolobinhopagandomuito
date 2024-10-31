@@ -2,7 +2,8 @@ import { useState } from "react";
 import styled from "styled-components";
 
 const InputEstilizado = styled.input`
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   background-color: transparent;
   border: 2px solid #e5e7eb;
   border-radius: 10px;
@@ -13,6 +14,10 @@ const InputEstilizado = styled.input`
 
   &:focus {
     border: 3px solid #10b981;
+  }
+
+  @media (max-width: 768px) {
+    margin-bottom: 5px;
   }
 `;
 

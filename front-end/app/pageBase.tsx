@@ -1,25 +1,21 @@
-'use client'
+"use client";
 
-import React from 'react';
-import Cabecalho from './components/Cabecalho';
-import Rodape from './components/Rodape';
+import React from "react";
+import Cabecalho from "./components/Cabecalho";
+import Rodape from "./components/Rodape";
 
 interface PaginaBaseProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
-export default function PaginaBase({ children }: PaginaBaseProps): JSX.Element{
+export default function PaginaBase({ children }: PaginaBaseProps): JSX.Element {
   return (
     <>
-      <Cabecalho
-        titulo='FIPPTruco'
-      />
+      <Cabecalho titulo="FIPPTruco" />
 
       {children}
 
-      <Rodape 
-        texto='© 2024 FIPPTruco. Todos os direitos reservados.'
-      />
+      <Rodape texto="© 2024 FIPPTruco. Todos os direitos reservados." />
     </>
-  )
+  );
 }

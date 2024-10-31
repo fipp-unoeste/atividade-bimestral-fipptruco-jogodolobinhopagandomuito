@@ -1,26 +1,44 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 const FooterEstilizado = styled.footer`
-  background-color: #1F2937;
+  background-color: #1f2937;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 80px;
+  padding: 20px;
 
-  p{
+  p {
     color: white;
     font-size: 18px;
+    margin: 0;
+    text-align: center;
   }
-`
 
-interface RodapeProps{
-  texto: string
+  @media (max-width: 768px) {
+    padding: 15px;
+
+    p {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px;
+
+    p {
+      font-size: 14px;
+    }
+  }
+`;
+
+interface RodapeProps {
+  texto: string;
 }
 
-export default function Rodape({ texto }: RodapeProps): JSX.Element{
-  return(
+export default function Rodape({ texto }: RodapeProps): JSX.Element {
+  return (
     <FooterEstilizado>
       <p>{texto}</p>
     </FooterEstilizado>
-  )
+  );
 }

@@ -3,10 +3,16 @@ import styled from "styled-components";
 const SectionEstilizado = styled.section`
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 150px;
+  justify-content: space-around;
   height: 400px;
-  background-color: #FFF;
+  background-color: #fff;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 30px;
+    height: auto;
+    padding: 50px 20px;
+  }
 `;
 
 const DivEstilizada = styled.div`
@@ -16,26 +22,40 @@ const DivEstilizada = styled.div`
   justify-content: center;
   gap: 15px;
   width: 350px;
-  text-align: justify;
+  text-align: center;
+  padding: 0 30px;
 
-  div{
-    background-color: #D1FAE5;
+  div {
+    background-color: #d1fae5;
     padding: 15px;
     border-radius: 100%;
 
-    svg{
+    svg {
       width: 40px;
       height: 40px;
       color: #059669;
+
+      @media (max-width: 768px) {
+        width: 30px;
+        height: 30px;
+      }
     }
   }
 
-  h3{
+  h3 {
     font-size: 25px;
+
+    @media (max-width: 768px) {
+      font-size: 20px;
+    }
   }
 
-  p{
+  p {
     font-size: 17px;
+
+    @media (max-width: 768px) {
+      font-size: 15px;
+    }
   }
 `;
 
@@ -54,8 +74,10 @@ export default function InformacoesDoSite() {
           </svg>
         </div>
 
-        <h3>Jogue com Amigos</h3>
-        <p>Crie salas privadas e desafie seus amigos para partidas emocionantes</p>
+        <h3>Salas Personalizadas</h3>
+        <p>
+          Crie salas privadas e desafie seus amigos para partidas emocionantes
+        </p>
       </DivEstilizada>
 
       <DivEstilizada>
@@ -70,7 +92,7 @@ export default function InformacoesDoSite() {
           </svg>
         </div>
 
-        <h3>100% Seguro</h3>
+        <h3>Totalmente Gratuito</h3>
         <p>Ambiente seguro e moderado para sua diversão</p>
       </DivEstilizada>
 
@@ -90,5 +112,5 @@ export default function InformacoesDoSite() {
         <p>Jogue em qualquer dispositivo sem travamentos</p>
       </DivEstilizada>
     </SectionEstilizado>
-  )
+  );
 }

@@ -44,7 +44,7 @@ export default function HomePage() {
         <InformacoesDoSite />
 
         <PorqueFIPPTruco />
-        
+
         <JogueOndeQuiser />
 
         {!isAutenticado ? <JogueAgora /> : null}

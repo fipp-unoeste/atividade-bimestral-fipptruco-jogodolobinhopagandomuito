@@ -15,6 +15,11 @@ const DivEstilizada = styled.div`
 
   &:hover {
     transform: translateY(-10px);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+  }
+
+  @media (max-width: 1024px) {
+    width: 85%;
   }
 
   #divSvg {
@@ -37,7 +42,7 @@ const DivEstilizada = styled.div`
     gap: 15px;
 
     h5 {
-      font-size: 19px;
+      font-size: 1.5rem;
     }
 
     ul {
