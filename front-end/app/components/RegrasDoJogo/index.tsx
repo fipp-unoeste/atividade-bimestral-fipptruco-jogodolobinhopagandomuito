@@ -8,7 +8,17 @@ const DivEstilizada = styled.div`
   justify-content: center;
   width: 85%;
   gap: 60px;
-`
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    gap: 20px;
+  }
+`;
 
 export default function RegrasDoJogo() {
   return (

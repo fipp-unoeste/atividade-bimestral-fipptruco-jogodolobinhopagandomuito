@@ -12,7 +12,8 @@ const DivEstilizada = styled.div`
     font-size: 22px;
   }
 
-  #divManilhas {
+  #divManilhas,
+  #divCartas {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -32,10 +33,33 @@ const DivEstilizada = styled.div`
     font-size: 18px;
   }
 
-  #divCartas{
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  @media (max-width: 1024px) {
+    width: 60%;
+    h4 {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 80%;
+    h4 {
+      font-size: 18px;
+    }
+
+    #numeroManilha {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    h4 {
+      font-size: 16px;
+    }
+
+    #numeroManilha {
+      font-size: 14px;
+    }
   }
 `;
 
@@ -85,7 +109,7 @@ export default function CampoValorCartas({
       <h4>{titulo}</h4>
 
       <div>
-        {tipoDiv == "Manilhas" ? (
+        {tipoDiv === "Manilhas" ? (
           <div id="divManilhas">
             {manilhas.map((manilha, index) => (
               <div key={index}>

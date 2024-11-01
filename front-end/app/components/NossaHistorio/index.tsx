@@ -16,6 +16,27 @@ const SectionEstilizado = styled.section`
   p {
     font-size: 18px;
   }
+
+  @media (max-width: 1440px) {
+    padding: 50px 300px;
+  }
+
+  @media (max-width: 1024px) {
+    padding: 50px 100px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 30px 20px;
+    gap: 20px;
+
+    h2 {
+      font-size: 28px;
+    }
+
+    p {
+      font-size: 16px;
+    }
+  }
 `;
 
 export default function NossaHistoria() {

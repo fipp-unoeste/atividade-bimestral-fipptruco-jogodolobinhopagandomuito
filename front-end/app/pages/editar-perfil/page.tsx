@@ -1,9 +1,13 @@
 "use client";
 
 import CampoEditar from "@/app/components/CampoEditar";
-import { useDadosUsuarioContext } from "@/app/contexts/useContext";
+import {
+  useAutenticacaoContext,
+  useDadosUsuarioContext,
+} from "@/app/contexts/useContext";
 import PaginaBase from "@/app/pageBase";
 import Link from "next/link";
+import { useEffect } from "react";
 import styled from "styled-components";
 
 const MainEstilizado = styled.main`
@@ -60,11 +64,57 @@ const MainEstilizado = styled.main`
     padding: 40px;
     background-color: #fff;
     border-radius: 20px;
+    width: 40%;
+
+    @media (max-width: 768px) {
+      width: 80%;
+      padding: 20px;
+    }
+
+    @media (max-width: 480px) {
+      width: 90%;
+      padding: 15px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    gap: 30px;
+
+    #campoBotao h2 {
+      font-size: 30px;
+    }
+
+    #campoBotao div {
+      width: 20%;
+    }
+
+    h3 {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #campoBotao h2 {
+      font-size: 25px;
+    }
+
+    #campoBotao div a p {
+      font-size: 12px;
+    }
+
+    h3 {
+      font-size: 18px;
+    }
   }
 `;
 
 export default function EditarPerfil() {
   const { usuario } = useDadosUsuarioContext();
+  const { acessarPagina } = useAutenticacaoContext();
+
+  useEffect(() => {
+    acessarPagina();
+  }, [acessarPagina]);
 
   return (
     <PaginaBase>

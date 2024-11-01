@@ -1,32 +1,43 @@
-import Link from "next/link"
-import styled from "styled-components"
-import { DivEstilizada } from "../SalasDisponiveis"
+import Link from "next/link";
+import styled from "styled-components";
+import { DivEstilizada } from "../SalasDisponiveis";
 
 const SectionEstilizado = styled.section`
-  
-  #divCriarSala{
+  #divCriarSala {
     height: 130px;
 
-    div{
+    div {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 5px;
 
-      h2{
+      h2 {
         font-size: 30px;
       }
 
-      p{
+      p {
         font-size: 17px;
       }
     }
   }
-`
 
-export default function CamposSalaPesquisa(){
-  return(
+  @media (max-width: 768px) {
+    #divCriarSala div {
+      h2 {
+        font-size: 24px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+`;
+
+export default function CamposSalaPesquisa() {
+  return (
     <SectionEstilizado>
       <DivEstilizada id="divCriarSala">
         <div>
@@ -39,9 +50,7 @@ export default function CamposSalaPesquisa(){
         </Link>
       </DivEstilizada>
 
-      <div>
-        
-      </div>
+      <div></div>
     </SectionEstilizado>
-  )
+  );
 }

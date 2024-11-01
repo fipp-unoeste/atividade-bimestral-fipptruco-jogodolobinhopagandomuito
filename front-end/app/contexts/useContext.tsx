@@ -1,27 +1,27 @@
-import { useContext } from "react"
-import Contexts from "./Context"
+import { useContext } from "react";
+import Contexts from "./Context";
 
 export const useDadosUsuarioContext = () => {
-  return useContext(Contexts.DadosUsuarioContext)
-}
+  return useContext(Contexts.DadosUsuarioContext);
+};
 
 export const useAutenticacaoContext = () => {
-  return useContext(Contexts.AutenticacaoContext)
-}
+  return useContext(Contexts.AutenticacaoContext);
+};
 
 export const useDadosSalaContext = () => {
-  return useContext(Contexts.DadosSalaContext)
-}
+  return useContext(Contexts.DadosSalaContext);
+};
 
 export const useDadosEquipeContext = () => {
-  return useContext(Contexts.DadosEquipeContext)
-}
+  return useContext(Contexts.DadosEquipeContext);
+};
 
 const useContexts = {
   useDadosUsuarioContext,
   useAutenticacaoContext,
   useDadosSalaContext,
-  useDadosEquipeContext
-}
+  useDadosEquipeContext,
+};
 
-export default useContexts
+export default useContexts;

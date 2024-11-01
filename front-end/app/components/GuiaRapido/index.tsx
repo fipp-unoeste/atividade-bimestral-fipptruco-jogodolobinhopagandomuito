@@ -5,11 +5,15 @@ import { SectionEstilizado } from "../JogueOndeQuiser";
 const DivEstilizada = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  display: flex;
-  align-items: center;
   justify-content: space-evenly;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 30px;
+  }
 `;
 
 export default function GuiaRapido() {

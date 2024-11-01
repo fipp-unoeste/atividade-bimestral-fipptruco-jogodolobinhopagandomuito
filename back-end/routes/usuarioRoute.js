@@ -1,11 +1,11 @@
-import express from 'express'
-import UsuarioController from '../controllers/usuarioController.js'
-import AuthMiddleware from '../middlewares/authMiddleware.js'
+import express from "express";
+import UsuarioController from "../controllers/usuarioController.js";
+import AuthMiddleware from "../middlewares/authMiddleware.js";
 
-const router = express.Router()
+const router = express.Router();
 
-let ctrl = new UsuarioController()
-let auth = new AuthMiddleware()
+let ctrl = new UsuarioController();
+let auth = new AuthMiddleware();
 
 router.get("/", auth.validar, (req, res) => {
   // #swagger.tags = ['Usuário']
@@ -15,8 +15,8 @@ router.get("/", auth.validar, (req, res) => {
      }] 
   */
 
-    ctrl.listar(req, res)
-})
+  ctrl.listar(req, res);
+});
 
 router.get("/:id", auth.validar, (req, res) => {
   //#swagger.tags = ['Usuário']
@@ -26,8 +26,8 @@ router.get("/:id", auth.validar, (req, res) => {
      }] 
   */
 
-  ctrl.obter(req, res)
-})
+  ctrl.obter(req, res);
+});
 
 router.post("/", (req, res) => {
   //#swagger.tags = ['Usuário']
@@ -44,8 +44,8 @@ router.post("/", (req, res) => {
       } 
   */
 
-  ctrl.gravar(req, res)
-})
+  ctrl.gravar(req, res);
+});
 
 router.put("/", (req, res) => {
   //#swagger.tags = ['Usuário']
@@ -62,13 +62,13 @@ router.put("/", (req, res) => {
       } 
   */
 
-  ctrl.alterar(req, res)
-})
+  ctrl.alterar(req, res);
+});
 
 router.patch("/", (req, res) => {
   //#swagger.tags = ['Usuário']
   //#swagger.summary = 'Realiza a alteração parcial do usuário'
-      /*  #swagger.requestBody = {
+  /*  #swagger.requestBody = {
           required: true,
           content: {
               "application/json": {
@@ -80,7 +80,7 @@ router.patch("/", (req, res) => {
       } 
   */
 
-  ctrl.alteracaoParcial(req, res)
-})
+  ctrl.alteracaoParcial(req, res);
+});
 
-export default router
+export default router;

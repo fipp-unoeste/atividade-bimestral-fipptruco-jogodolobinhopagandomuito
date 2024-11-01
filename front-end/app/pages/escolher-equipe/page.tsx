@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import CampoEquipe from "@/app/components/CampoEquipe";
 import { useDadosEquipeContext } from "@/app/contexts/useContext";
@@ -8,68 +8,89 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const MainEstilizado = styled.main`
-  background-color: #14532D;
+  height: 100vh;
+  background-color: #14532d;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 60px 0;
-`
+
+  @media (max-width: 768px) {
+    padding: 40px 0;
+  }
+
+  @media (max-width: 480px) {
+    padding: 20px 0;
+  }
+`;
 
 const SectionEstilizado = styled.section`
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 50px;
-  padding: 50px 0;
-  width: 60%;
+  gap: 30px;
+  padding: 30px 20px;
+  width: 80%;
   border-radius: 20px;
 
-  h2{
-    font-size: 38px;
-  }
+  h2 {
+    font-size: 32px;
 
-  button{
-    border-radius: 10px;
-    padding: 15px 55px;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    background-color: #059669;
-    color: white;
-    transition: background-color 0.3s ease;
-  }
+    @media (max-width: 768px) {
+      font-size: 28px;
+    }
 
-  button:disabled{
-    background-color: #D1D5DB;
-    cursor: not-allowed;
-  }
-
-  button:hover{
-    background-color: #059668ae;
-  }
-`
-
-export default function EscolherEquipe(){
-  const [selectedEquipe, setSelectedEquipe] = useState<string | null>(null)
-  const { todasEquipes, equipes, setEquipe } = useDadosEquipeContext()
-  const router = useRouter();
-
-  useEffect(() => { todasEquipes() }, [])
-
-  const isClick = () => {
-    if(selectedEquipe){
-      const equipeSelecionada = equipes?.find((equipe: any) => equipe.descricao === selectedEquipe);
-
-      if(equipeSelecionada){
-        setEquipe(equipeSelecionada)
-        router.push("")
-      }
+    @media (max-width: 480px) {
+      font-size: 24px;
     }
   }
 
-  return(
+  button {
+    border-radius: 10px;
+    padding: 15px 35px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #059669;
+    color: white;
+    transition: background-color 0.3s ease;
+
+    @media (max-width: 768px) {
+      padding: 12px 30px;
+    }
+
+    @media (max-width: 480px) {
+      padding: 10px 25px;
+      font-size: 14px;
+    }
+  }
+`;
+
+export default function EscolherEquipe() {
+  const [selectedEquipe, setSelectedEquipe] = useState<string | null>(null);
+  const { todasEquipes, equipes, setEquipe } = useDadosEquipeContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    todasEquipes();
+  }, []);
+
+  const isClick = () => {
+    if (selectedEquipe) {
+      const equipeSelecionada = equipes?.find(
+        (equipe: any) => equipe.descricao === selectedEquipe
+      );
+
+      if (equipeSelecionada) {
+        setEquipe(equipeSelecionada);
+        router.push("");
+      }
+    }
+  };
+
+  return (
     <PaginaBase>
       <MainEstilizado>
         <SectionEstilizado>
@@ -80,8 +101,12 @@ export default function EscolherEquipe(){
               <CampoEquipe
                 key={index}
                 nomeEquipe={equipe.descricao}
-                nomeJogador1={equipe.descricao === "Equipe 1" ? "Jogador 1" : "Jogador 3"}
-                nomeJogador2={equipe.descricao === "Equipe 1" ? "Jogador 2" : "Jogador 4"}
+                nomeJogador1={
+                  equipe.descricao === "Equipe 1" ? "Jogador 1" : "Jogador 3"
+                }
+                nomeJogador2={
+                  equipe.descricao === "Equipe 1" ? "Jogador 2" : "Jogador 4"
+                }
                 isSelected={selectedEquipe === equipe.descricao}
                 onClick={() => setSelectedEquipe(equipe.descricao)}
               />
@@ -94,7 +119,7 @@ export default function EscolherEquipe(){
             Pronto
           </button>
         </SectionEstilizado>
-      </MainEstilizado>      
+      </MainEstilizado>
     </PaginaBase>
-  )
+  );
 }

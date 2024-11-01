@@ -1,33 +1,33 @@
-import { useDadosUsuarioContext } from "@/app/contexts/useContext"
-import styled from "styled-components"
+import { useDadosUsuarioContext } from "@/app/contexts/useContext";
+import styled from "styled-components";
 
 const DivEstilizada = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
   gap: 30px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 20px;
   width: 30%;
   height: auto;
   padding: 40px;
 
-  #divNome{
+  #divNome {
     display: flex;
     align-items: center;
     justify-content: left;
     gap: 30px;
 
-    h3{
+    h3 {
       font-size: 28px;
     }
 
-    #campoFoto{
-      background-color: #D1FAE5;
+    #campoFoto {
+      background-color: #d1fae5;
       border-radius: 100%;
       padding: 28px;
 
-      svg{
+      svg {
         width: 55px;
         height: 55px;
         color: #059669;
@@ -35,37 +35,113 @@ const DivEstilizada = styled.div`
     }
   }
 
-  #divEmail{
+  #divEmail {
     display: flex;
     align-items: center;
-    
-    div{
+
+    div {
       display: flex;
       flex-direction: column;
       gap: 10px;
 
-      h5{
+      h5 {
         font-weight: 100;
         font-size: 16px;
       }
 
-      p{
+      p {
         font-size: 18px;
         font-weight: 600;
       }
     }
   }
-`
 
-export default function InformacoesConta(){
-  const { usuario } = useDadosUsuarioContext()
+  @media (max-width: 1024px) {
+    width: 50%;
+  }
 
-  return(
+  @media (max-width: 768px) {
+    width: 70%;
+    padding: 20px;
+
+    #divNome {
+      gap: 20px;
+
+      h3 {
+        font-size: 24px;
+      }
+
+      #campoFoto {
+        padding: 20px;
+        svg {
+          width: 45px;
+          height: 45px;
+        }
+      }
+    }
+
+    #divEmail {
+      div {
+        h5 {
+          font-size: 14px;
+        }
+
+        p {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    width: 90%;
+    padding: 15px;
+
+    #divNome {
+      gap: 15px;
+
+      h3 {
+        font-size: 20px;
+      }
+
+      #campoFoto {
+        padding: 15px;
+
+        svg {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+
+    #divEmail {
+      div {
+        h5 {
+          font-size: 12px;
+        }
+
+        p {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+`;
+
+export default function InformacoesConta() {
+  const { usuario } = useDadosUsuarioContext();
+
+  return (
     <DivEstilizada>
       <div id="divNome">
         <div id="campoFoto">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+            />
           </svg>
         </div>
 
@@ -81,5 +157,5 @@ export default function InformacoesConta(){
         </div>
       </div>
     </DivEstilizada>
-  )
+  );
 }

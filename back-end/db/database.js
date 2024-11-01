@@ -1,73 +1,92 @@
-import mysql from 'mysql2'
+import mysql from "mysql2";
 
-export default class Database{
-  #conexao
+export default class Database {
+  #conexao;
 
-  get conexao() { return this.#conexao } 
-  set conexao(conexao) { this.#conexao = conexao }
+  get conexao() {
+    return this.#conexao;
+  }
+  set conexao(conexao) {
+    this.#conexao = conexao;
+  }
 
-  constructor(){
+  constructor() {
     this.#conexao = mysql.createPool({
-        host: "database-1.cdqoimge4duz.us-east-1.rds.amazonaws.com",
-        port: 3306,
-        database: "projeto_truco",
-        user: "admin",
-        password: "valentim123"
-    })
+      host: "database-1.cdqoimge4duz.us-east-1.rds.amazonaws.com",
+      port: 3306,
+      database: "projeto_truco",
+      user: "admin",
+      password: "valentim123",
+    });
   }
 
-  Rollback(){
-    var cnn = this.#conexao
+  Rollback() {
+    var cnn = this.#conexao;
 
-    return new Promise(function(res, rej){
-        cnn.query("ROLLBACK", function (error, results, fields){
-            if(error){ rej(error) }
-            else{ res(results) }
-        })
-    })
-  }
- 
-  Commit(){
-      var cnn = this.#conexao
-
-      return new Promise(function(res, rej){
-          cnn.query("COMMIT", function (error, results, fields){
-              if(error){ rej(error) }
-              else{ res(results) }           
-          })
-      })
+    return new Promise(function (res, rej) {
+      cnn.query("ROLLBACK", function (error, results, fields) {
+        if (error) {
+          rej(error);
+        } else {
+          res(results);
+        }
+      });
+    });
   }
 
-  ExecutaComando(sql, valores){
-      var cnn = this.#conexao
-    
-      return new Promise(function(res, rej){
-          cnn.query(sql, valores, function (error, results, fields){
-              if(error){ rej(error) }
-              else{ res(results) }  
-          })
-      })
+  Commit() {
+    var cnn = this.#conexao;
+
+    return new Promise(function (res, rej) {
+      cnn.query("COMMIT", function (error, results, fields) {
+        if (error) {
+          rej(error);
+        } else {
+          res(results);
+        }
+      });
+    });
   }
 
-  ExecutaComandoNonQuery(sql, valores){
-      var cnn = this.#conexao
+  ExecutaComando(sql, valores) {
+    var cnn = this.#conexao;
 
-      return new Promise(function(res, rej){
-          cnn.query(sql, valores, function (error, results, fields){
-              if(error){ rej(error) }
-              else{ res(results.affectedRows > 0) }
-          })
-      })
+    return new Promise(function (res, rej) {
+      cnn.query(sql, valores, function (error, results, fields) {
+        if (error) {
+          rej(error);
+        } else {
+          res(results);
+        }
+      });
+    });
   }
 
-  ExecutaComandoLastInserted(sql, valores){
-      var cnn = this.#conexao
+  ExecutaComandoNonQuery(sql, valores) {
+    var cnn = this.#conexao;
 
-      return new Promise(function(res, rej){
-          cnn.query(sql, valores, function (error, results, fields){
-              if (error){ rej(error) }
-              else{ res(results.insertId) }
-          })
-      })
+    return new Promise(function (res, rej) {
+      cnn.query(sql, valores, function (error, results, fields) {
+        if (error) {
+          rej(error);
+        } else {
+          res(results.affectedRows > 0);
+        }
+      });
+    });
+  }
+
+  ExecutaComandoLastInserted(sql, valores) {
+    var cnn = this.#conexao;
+
+    return new Promise(function (res, rej) {
+      cnn.query(sql, valores, function (error, results, fields) {
+        if (error) {
+          rej(error);
+        } else {
+          res(results.insertId);
+        }
+      });
+    });
   }
 }

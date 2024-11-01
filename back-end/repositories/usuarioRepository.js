@@ -1,103 +1,108 @@
-import UsuarioEntity from "../entities/usuarioEntity.js"
-import BaseRepository from "./baseRepository.js"
+import UsuarioEntity from "../entities/usuarioEntity.js";
+import BaseRepository from "./baseRepository.js";
 
-export default class UsuarioRepository extends BaseRepository{
-  constructor(db){ super(db) }
-
-  async listar(){
-    let sql = "SELECT * FROM tb_usuario"
-    let rows = await this.db.ExecutaComando(sql)
-
-    return this.toMap(rows)
+export default class UsuarioRepository extends BaseRepository {
+  constructor(db) {
+    super(db);
   }
 
-  async obter(id){
-    let sql = "SELECT * FROM tb_usuario WHERE usu_id = ?"
-    let valores = [id]
-    let row = await this.db.ExecutaComando(sql, valores)
+  async listar() {
+    let sql = "SELECT * FROM tb_usuario";
+    let rows = await this.db.ExecutaComando(sql);
 
-    return this.toMap(row[0])
+    return this.toMap(rows);
   }
 
-  async gravar(entidade){
-    let sql = "INSERT INTO tb_usuario (usu_nome, usu_email, usu_senha) VALUES (?, ?, ?)"
-    let valores = [entidade.nome, entidade.email, entidade.senha]
-    let result = await this.db.ExecutaComandoNonQuery(sql, valores)
-    
-    return result
+  async obter(id) {
+    let sql = "SELECT * FROM tb_usuario WHERE usu_id = ?";
+    let valores = [id];
+    let row = await this.db.ExecutaComando(sql, valores);
+
+    return this.toMap(row[0]);
   }
 
-  async verificarEmailExistente(email){
-    let sql = "SELECT * FROM tb_usuario WHERE usu_email = ?"
-    let valores = [email]
-    let rows = await this.db.ExecutaComando(sql, valores)
+  async gravar(entidade) {
+    let sql =
+      "INSERT INTO tb_usuario (usu_nome, usu_email, usu_senha) VALUES (?, ?, ?)";
+    let valores = [entidade.nome, entidade.email, entidade.senha];
+    let result = await this.db.ExecutaComandoNonQuery(sql, valores);
 
-    return rows.length > 0
+    return result;
   }
 
-  async validarAcesso(email, senha){
-    let sql = "SELECT * FROM tb_usuario WHERE usu_email = ? AND usu_senha = ?"
-    let valores = [email, senha]
-    let row = await this.db.ExecutaComando(sql, valores)
-    if(!row || row.length === 0){ return null }
-    
-    return this.toMap(row[0])
+  async verificarEmailExistente(email) {
+    let sql = "SELECT * FROM tb_usuario WHERE usu_email = ?";
+    let valores = [email];
+    let rows = await this.db.ExecutaComando(sql, valores);
+
+    return rows.length > 0;
   }
 
-  async alterar(entidade){
-    let sql = "UPDATE tb_usuario SET usu_nome = ?, usu_email = ?, usu_senha = ? WHERE usu_id = ?"
-    let valores = [entidade.nome, entidade.email, entidade.senha, entidade.id]
-    let result = await this.db.ExecutaComandoNonQuery(sql, valores)
-    
-    if (result) {
-      return await this.obter(entidade.id);
+  async validarAcesso(email, senha) {
+    let sql = "SELECT * FROM tb_usuario WHERE usu_email = ? AND usu_senha = ?";
+    let valores = [email, senha];
+    let row = await this.db.ExecutaComando(sql, valores);
+    if (!row || row.length === 0) {
+      return null;
     }
-  
-    return null;
+
+    return this.toMap(row[0]);
   }
 
-  async alteracaoParcial(entidade){
-    let sql = "UPDATE tb_usuario SET usu_nome = coalesce(?, usu_nome), usu_email = coalesce(?, usu_email), usu_senha = coalesce(?, usu_senha) WHERE usu_id = ?"
-    let valores = [entidade.nome, entidade.email, entidade.senha, entidade.id]
-    let result = await this.db.ExecutaComandoNonQuery(sql, valores)
+  async alterar(entidade) {
+    let sql =
+      "UPDATE tb_usuario SET usu_nome = ?, usu_email = ?, usu_senha = ? WHERE usu_id = ?";
+    let valores = [entidade.nome, entidade.email, entidade.senha, entidade.id];
+    let result = await this.db.ExecutaComandoNonQuery(sql, valores);
 
     if (result) {
       return await this.obter(entidade.id);
     }
-  
+
     return null;
   }
 
-  toMap(rows){
-    if(rows && typeof rows.length == "number"){
-      let lista = []
+  async alteracaoParcial(entidade) {
+    let sql =
+      "UPDATE tb_usuario SET usu_nome = coalesce(?, usu_nome), usu_email = coalesce(?, usu_email), usu_senha = coalesce(?, usu_senha) WHERE usu_id = ?";
+    let valores = [entidade.nome, entidade.email, entidade.senha, entidade.id];
+    let result = await this.db.ExecutaComandoNonQuery(sql, valores);
 
-      for(let i = 0; i < rows.length; i++){
-        let row = rows[i]
-        let usuario = new UsuarioEntity()
+    if (result) {
+      return await this.obter(entidade.id);
+    }
 
-        usuario.id = row["usu_id"]
-        usuario.nome = row["usu_nome"]
-        usuario.email = row["usu_email"]
-        usuario.senha = row["usu_senha"]
+    return null;
+  }
 
-        lista.push(usuario)
+  toMap(rows) {
+    if (rows && typeof rows.length == "number") {
+      let lista = [];
+
+      for (let i = 0; i < rows.length; i++) {
+        let row = rows[i];
+        let usuario = new UsuarioEntity();
+
+        usuario.id = row["usu_id"];
+        usuario.nome = row["usu_nome"];
+        usuario.email = row["usu_email"];
+        usuario.senha = row["usu_senha"];
+
+        lista.push(usuario);
       }
 
-      return lista
-    }
-    else if(rows){
-      let usuario = new UsuarioEntity()
+      return lista;
+    } else if (rows) {
+      let usuario = new UsuarioEntity();
 
-      usuario.id = rows["usu_id"]
-      usuario.nome = rows["usu_nome"]
-      usuario.email = rows["usu_email"]
-      usuario.senha = rows["usu_senha"]
-    
-      return usuario
-    }
-    else{
-      return null
+      usuario.id = rows["usu_id"];
+      usuario.nome = rows["usu_nome"];
+      usuario.email = rows["usu_email"];
+      usuario.senha = rows["usu_senha"];
+
+      return usuario;
+    } else {
+      return null;
     }
   }
 }

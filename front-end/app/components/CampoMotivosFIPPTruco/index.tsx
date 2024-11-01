@@ -9,7 +9,7 @@ const DivEstilizada = styled.div`
   background-color: #fff;
   border-radius: 14px;
   width: 25%;
-  padding: 30px 0;
+  padding: 30px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.35);
   transition: transform 0.3s ease;
 
@@ -19,7 +19,13 @@ const DivEstilizada = styled.div`
   }
 
   @media (max-width: 1024px) {
+    width: 60%;
+  }
+
+  @media (max-width: 768px) {
     width: 85%;
+    padding: 20px;
+    gap: 20px;
   }
 
   #divSvg {
@@ -43,6 +49,10 @@ const DivEstilizada = styled.div`
 
     h5 {
       font-size: 1.5rem;
+
+      @media (max-width: 768px) {
+        font-size: 1.2rem;
+      }
     }
 
     ul {
@@ -50,6 +60,14 @@ const DivEstilizada = styled.div`
       flex-direction: column;
       text-align: justify;
       justify-content: center;
+
+      li {
+        font-size: 1rem;
+
+        @media (max-width: 768px) {
+          font-size: 0.9rem;
+        }
+      }
     }
   }
 `;

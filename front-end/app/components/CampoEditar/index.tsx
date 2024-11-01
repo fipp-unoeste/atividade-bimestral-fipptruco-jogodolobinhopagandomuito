@@ -8,11 +8,14 @@ const DivEstilizada = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 5px;
+  width: 100%;
 
   form {
     display: flex;
     flex-direction: column;
+    gap: 20px;
   }
 
   #campoBotoes {
@@ -35,6 +38,25 @@ const DivEstilizada = styled.div`
       color: #fff;
       background-color: #059669;
     }
+
+    @media (max-width: 768px) {
+      gap: 30px;
+
+      button {
+        padding: 8px 20px;
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+      gap: 20px;
+
+      button {
+        width: 100%;
+        padding: 10px;
+      }
+    }
   }
 `;
 
@@ -43,13 +65,21 @@ const ErrorMessage = styled.span`
   font-size: 18px;
   text-align: center;
   margin-bottom: 25px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
 `;
 
 interface CampoEditarProps {
   valorNome: string;
   valorEmail: string;
   valorSenha: string;
-  valorId: number
+  valorId: number;
 }
 
 export default function CampoEditar({

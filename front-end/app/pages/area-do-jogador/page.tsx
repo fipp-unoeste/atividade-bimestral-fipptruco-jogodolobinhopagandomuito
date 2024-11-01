@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import OpcoesJogador from "@/app/components/OpcoesJogador";
 import { useAutenticacaoContext } from "@/app/contexts/useContext";
@@ -7,38 +7,62 @@ import { useEffect } from "react";
 import styled from "styled-components";
 
 const MainEstilizado = styled.main`
-  height: 90vh;
-  background-color: #F9FAFB;
+  height: 100vh;
+  background-color: #f9fafb;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  text-align: center;
+  gap: 50px;
+  padding: 50px;
 
-  h2{
-    font-size: 45px;
+  h2 {
+    font-size: 35px;
   }
-`
+
+  @media (max-width: 1406px) {
+    height: 100%;
+  }
+
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 28px;
+    }
+  }
+`;
 
 const SectionEstilizado = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 180px;
-`
 
-export default function AreaDoJogador(){
-  const { acessarPagina } = useAutenticacaoContext()
+  @media (max-width: 1024px) {
+    gap: 80px;
+  }
 
-  useEffect(() => { acessarPagina() }, [acessarPagina])
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 30px;
+  }
+`;
 
-  return(
+export default function AreaDoJogador() {
+  const { acessarPagina } = useAutenticacaoContext();
+
+  useEffect(() => {
+    acessarPagina();
+  }, [acessarPagina]);
+
+  return (
     <PaginaBase>
-
       <MainEstilizado>
         <h2>Área do Jogador</h2>
 
         <SectionEstilizado>
-          <OpcoesJogador 
+          <OpcoesJogador
             titulo="Criar Nova Sala"
             texto="Crie sua própria sala de jogo e convide amigos para jogar"
             textoBotao="Criar Sala"
@@ -47,7 +71,7 @@ export default function AreaDoJogador(){
             svgBotao="M17 8l4 4m0 0l-4 4m4-4H3"
           />
 
-          <OpcoesJogador 
+          <OpcoesJogador
             titulo="Entrar em Sala"
             texto="Entre em uma sala ja existente"
             textoBotao="Buscar Salas"
@@ -56,7 +80,7 @@ export default function AreaDoJogador(){
             svgBotao="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
           />
 
-          <OpcoesJogador 
+          <OpcoesJogador
             titulo="Minha Conta"
             texto="Gerencie seu perfil, veja estatísticas e histórico"
             textoBotao="Ver Perfil"
@@ -66,7 +90,6 @@ export default function AreaDoJogador(){
           />
         </SectionEstilizado>
       </MainEstilizado>
-
     </PaginaBase>
-  )
+  );
 }

@@ -19,12 +19,10 @@ export default function RootLayout({
       <body>
         <UsuarioProvider>
           <SalaProvider>
-            <EquipeProvider>
-              {children}
-            </EquipeProvider>
+            <EquipeProvider>{children}</EquipeProvider>
           </SalaProvider>
         </UsuarioProvider>
       </body>
     </html>
-  )
+  );
 }

@@ -1,22 +1,22 @@
-import express from 'express'
-import EquipeController from '../controllers/equipeController.js'
+import express from "express";
+import EquipeController from "../controllers/equipeController.js";
 
-const router = express.Router()
+const router = express.Router();
 
-let ctrl = new EquipeController()
+let ctrl = new EquipeController();
 
 router.get("/", (req, res) => {
   // #swagger.tags = ['Equipe']
   // #swagger.summary = 'Endpoint para retornar todas as equipe'
 
-    ctrl.listar(req, res)
-})
+  ctrl.listar(req, res);
+});
 
 router.get("/:id", (req, res) => {
   //#swagger.tags = ['Equipe']
   //#swagger.summary = 'Retorna uma equipe baseado em um código'
 
-  ctrl.obter(req, res)
-})
+  ctrl.obter(req, res);
+});
 
-export default router
+export default router;

@@ -37,7 +37,21 @@ const DivEstilizada = styled.div`
 
     h4 {
       font-size: 18px;
+      text-align: center;
     }
+  }
+
+  @media (max-width: 1024px) {
+    width: 20%;
+  }
+
+  @media (max-width: 768px) {
+    width: 50%;
+  }
+
+  @media (max-width: 480px) {
+    width: 80%;
+    padding: 15px;
   }
 `;
 

@@ -14,6 +14,16 @@ const SectionEstilizada = styled.section`
   width: 100%;
   gap: 100px;
   padding-bottom: 60px;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  @media (max-width: 768px) {
+    gap: 20px;
+    padding: 20px;
+  }
 `;
 
 export default function Sobre() {
@@ -33,10 +43,7 @@ export default function Sobre() {
           tipo="Missão"
         />
 
-        <CampoValores 
-          titulo="Nossos Valores" 
-          tipo="Valores" 
-        />
+        <CampoValores titulo="Nossos Valores" tipo="Valores" />
       </SectionEstilizada>
 
       <JogueAgora />

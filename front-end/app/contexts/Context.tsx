@@ -1,54 +1,60 @@
-import { createContext } from "react"
+import { createContext } from "react";
 
-export interface DadosUsuario{
-  id?: number
-  nome?: string
-  email?: string
-  senha?: string
+export interface DadosUsuario {
+  id?: number;
+  nome?: string;
+  email?: string;
+  senha?: string;
 }
 
-interface DadosUsuarioType{
-  usuario: DadosUsuario | null
-  setUsuario: (usuario: DadosUsuario | null) => void
-  autenticarUsuario: (dados: DadosUsuario, tipo: "Cadastrar" | "Entrar") => Promise<void>
-  mensagemErro: string | null
-  setMensagemErro: (mensagemErro: string | null) => void
-  alterarDadosUsuario: (dados: DadosUsuario, tipo: "TodosDados" | "AlgumDado") => Promise<void>
+interface DadosUsuarioType {
+  usuario: DadosUsuario | null;
+  setUsuario: (usuario: DadosUsuario | null) => void;
+  autenticarUsuario: (
+    dados: DadosUsuario,
+    tipo: "Cadastrar" | "Entrar"
+  ) => Promise<void>;
+  mensagemErro: string | null;
+  setMensagemErro: (mensagemErro: string | null) => void;
+  alterarDadosUsuario: (
+    dados: DadosUsuario,
+    tipo: "TodosDados" | "AlgumDado"
+  ) => Promise<void>;
 }
 
-interface AutenticacaoContextType{
-  isAutenticado: boolean
-  setIsAutenticado: (valor: boolean) => void
-  acessarPagina: () => void
-  logout: () => void
+interface AutenticacaoContextType {
+  isAutenticado: boolean;
+  setIsAutenticado: (valor: boolean) => void;
+  acessarPagina: () => void;
+  logout: () => void;
 }
 
-export interface DadosSala{
-  id?: number
-  nome?: string
-  usuarioId?: number
+export interface DadosSala {
+  id?: number;
+  nome?: string;
+  usuarioId?: number;
 }
 
-interface DadosSalaType{
-  salas: DadosSala[] | null
-  setSalas: (sala: DadosSala[] | null) => void
-  cadastroSala: (dados: DadosSala) => Promise<void>
-  todasSalas: () => Promise<void>
-  salaEscolhida: DadosSala | null
-  setSalaEscolhida: (salaEscolhida: DadosSala | null) => void
+interface DadosSalaType {
+  salas: DadosSala[] | null;
+  setSalas: (sala: DadosSala[] | null) => void;
+  cadastroSala: (dados: DadosSala) => Promise<void>;
+  todasSalas: () => Promise<void>;
+  salaEscolhida: DadosSala | null;
+  setSalaEscolhida: (salaEscolhida: DadosSala | null) => void;
 }
 
-export interface DadosEquipe{
-  id?: number
-  descricao?: string
+export interface DadosEquipe {
+  id?: number;
+  descricao?: string;
 }
 
-interface DadosEquipeType{
-  equipes: DadosEquipe[] | null
-  setEquipes: (equipes: DadosEquipe[] | null) => void
-  equipe: DadosEquipe | null
-  setEquipe: (equipe: DadosEquipe | null) => void
-  todasEquipes: () => Promise<void>
+interface DadosEquipeType {
+  equipes: DadosEquipe[] | null;
+  setEquipes: (equipes: DadosEquipe[] | null) => void;
+  equipe: DadosEquipe | null;
+  setEquipe: (equipe: DadosEquipe | null) => void;
+  todasEquipes: () => Promise<void>;
 }
 
 const DadosUsuarioContext = createContext<DadosUsuarioType>({
@@ -57,15 +63,15 @@ const DadosUsuarioContext = createContext<DadosUsuarioType>({
   autenticarUsuario: async () => {},
   mensagemErro: null,
   setMensagemErro: () => {},
-  alterarDadosUsuario: async () => {}
-})
+  alterarDadosUsuario: async () => {},
+});
 
 const AutenticacaoContext = createContext<AutenticacaoContextType>({
   isAutenticado: false,
   setIsAutenticado: () => {},
   acessarPagina: () => {},
-  logout: () => {}
-})
+  logout: () => {},
+});
 
 const DadosSalaContext = createContext<DadosSalaType>({
   salas: null,
@@ -73,27 +79,27 @@ const DadosSalaContext = createContext<DadosSalaType>({
   cadastroSala: async () => {},
   todasSalas: async () => {},
   salaEscolhida: null,
-  setSalaEscolhida: () => {}
-})
+  setSalaEscolhida: () => {},
+});
 
 const DadosEquipeContext = createContext<DadosEquipeType>({
   equipes: null,
   setEquipes: () => {},
   equipe: null,
   setEquipe: () => {},
-  todasEquipes: async () => {}
-})
+  todasEquipes: async () => {},
+});
 
-DadosUsuarioContext.displayName = "DadosUsuario"
-AutenticacaoContext.displayName = "Autenticacao"
-DadosSalaContext.displayName = "DadosSala"
-DadosEquipeContext.displayName = "DadosEquipe"
+DadosUsuarioContext.displayName = "DadosUsuario";
+AutenticacaoContext.displayName = "Autenticacao";
+DadosSalaContext.displayName = "DadosSala";
+DadosEquipeContext.displayName = "DadosEquipe";
 
 const Contexts = {
   DadosUsuarioContext,
   AutenticacaoContext,
   DadosSalaContext,
-  DadosEquipeContext
+  DadosEquipeContext,
 };
 
-export default Contexts
+export default Contexts;
