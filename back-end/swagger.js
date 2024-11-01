@@ -1,6 +1,7 @@
 import swaggerAutogen from "swagger-autogen";
 import UsuarioEntity from "./entities/usuarioEntity.js";
 import SalaEntity from "./entities/salaEntity.js";
+import JogoEntity from "./entities/jogoEntity.js";
 
 const doc = {
   info: {
@@ -17,6 +18,12 @@ const doc = {
         12345
       ).toJSON(),
       salaModel: new SalaEntity(0, "Sala Truco 1", 1).toJSON(),
+      jogoModel: new JogoEntity(
+        0,
+        "01/11/2024 17:33:47",
+        "01/11/2024 17:63:47",
+        1
+      ).toJSON(),
     },
     securitySchemes: {
       bearerAuth: {

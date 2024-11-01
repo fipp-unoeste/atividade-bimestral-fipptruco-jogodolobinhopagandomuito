@@ -3,6 +3,7 @@ import "./globals.css";
 import { UsuarioProvider } from "./contexts/Provider/UsuarioProvider";
 import { SalaProvider } from "./contexts/Provider/SalaProvider";
 import { EquipeProvider } from "./contexts/Provider/EquipeProvider";
+import { JogoProvider } from "./contexts/Provider/JogoProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,7 +20,9 @@ export default function RootLayout({
       <body>
         <UsuarioProvider>
           <SalaProvider>
-            <EquipeProvider>{children}</EquipeProvider>
+            <EquipeProvider>
+              <JogoProvider>{children}</JogoProvider>
+            </EquipeProvider>
           </SalaProvider>
         </UsuarioProvider>
       </body>

@@ -102,7 +102,7 @@ const DivEstilizada = styled.div`
   }
 `;
 
-const ErrorMessage = styled.span`
+export const ErrorMessage = styled.span`
   color: red;
   font-size: 18px;
   text-align: center;

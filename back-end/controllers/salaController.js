@@ -51,7 +51,7 @@ export default class SalaController {
             .status(201)
             .json({ msg: "Sala gravado com sucesso!", sala: result });
         } else {
-          throw new Error("Erro ao inserir o usuário no banco de dados");
+          throw new Error("Erro ao inserir a sala no banco de dados");
         }
       } else {
         res

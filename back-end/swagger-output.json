@@ -324,6 +324,84 @@
           }
         }
       }
+    },
+    "/jogos/": {
+      "get": {
+        "tags": [
+          "Jogo"
+        ],
+        "summary": "Endpoint para retornar todos os jogos",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Jogo"
+        ],
+        "summary": "Cadastra um jogo",
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/jogoModel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jogos/{id}": {
+      "get": {
+        "tags": [
+          "Jogo"
+        ],
+        "summary": "Retorna um jogo baseado em um código",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -361,6 +439,27 @@
             "example": "Sala Truco 1"
           },
           "usuarioId": {
+            "type": "number",
+            "example": 1
+          }
+        }
+      },
+      "jogoModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 0
+          },
+          "dtInicio": {
+            "type": "string",
+            "example": "2024-11-01T09:00:00"
+          },
+          "dtFim": {
+            "type": "string",
+            "example": "2024-11-01T17:00:00"
+          },
+          "salaId": {
             "type": "number",
             "example": 1
           }

@@ -57,6 +57,19 @@ interface DadosEquipeType {
   todasEquipes: () => Promise<void>;
 }
 
+export interface DadosJogo {
+  id?: number;
+  dtInicio?: Date;
+  dtFim?: Date | null;
+  salaId?: number;
+}
+
+interface DadosJogoType {
+  jogos: DadosJogo[] | null;
+  setJogos: (jogo: DadosJogo[] | null) => void;
+  cadastroJogo: (dados: DadosJogo) => Promise<void>;
+}
+
 const DadosUsuarioContext = createContext<DadosUsuarioType>({
   usuario: null,
   setUsuario: () => {},
@@ -90,16 +103,24 @@ const DadosEquipeContext = createContext<DadosEquipeType>({
   todasEquipes: async () => {},
 });
 
+const DadosJogoContext = createContext<DadosJogoType>({
+  jogos: null,
+  setJogos: () => {},
+  cadastroJogo: async () => {},
+});
+
 DadosUsuarioContext.displayName = "DadosUsuario";
 AutenticacaoContext.displayName = "Autenticacao";
 DadosSalaContext.displayName = "DadosSala";
 DadosEquipeContext.displayName = "DadosEquipe";
+DadosJogoContext.displayName = "DadosJogo";
 
 const Contexts = {
   DadosUsuarioContext,
   AutenticacaoContext,
   DadosSalaContext,
   DadosEquipeContext,
+  DadosJogoContext,
 };
 
 export default Contexts;

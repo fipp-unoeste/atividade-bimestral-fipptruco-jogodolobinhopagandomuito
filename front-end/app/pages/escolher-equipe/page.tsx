@@ -1,9 +1,14 @@
 "use client";
 
 import CampoEquipe from "@/app/components/CampoEquipe";
-import { useDadosEquipeContext } from "@/app/contexts/useContext";
+import { ErrorMessage } from "@/app/components/Formulario";
+import {
+  useDadosEquipeContext,
+  useDadosJogoContext,
+  useDadosSalaContext,
+  useDadosUsuarioContext,
+} from "@/app/contexts/useContext";
 import PaginaBase from "@/app/pageBase";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
@@ -71,11 +76,15 @@ const SectionEstilizado = styled.section`
 export default function EscolherEquipe() {
   const [selectedEquipe, setSelectedEquipe] = useState<string | null>(null);
   const { todasEquipes, equipes, setEquipe } = useDadosEquipeContext();
-  const router = useRouter();
+  const { salaEscolhida } = useDadosSalaContext();
+  const { cadastroJogo } = useDadosJogoContext();
+  const { mensagemErro, setMensagemErro } = useDadosUsuarioContext();
+  const [dataFormatada, setDataFormatada] = useState<string | null>(null);
 
   useEffect(() => {
     todasEquipes();
-  }, []);
+    setMensagemErro(null);
+  }, [setMensagemErro]);
 
   const isClick = () => {
     if (selectedEquipe) {
@@ -85,7 +94,25 @@ export default function EscolherEquipe() {
 
       if (equipeSelecionada) {
         setEquipe(equipeSelecionada);
-        router.push("");
+
+        const dataAtual = new Date();
+
+        const dataAtualFormatada = dataAtual.toLocaleDateString("pt-BR", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+        });
+
+        setDataFormatada(dataAtualFormatada);
+
+        const dados = {
+          id: equipeSelecionada.id,
+          dtInicio: dataAtual,
+          dtFim: null,
+          salaId: salaEscolhida?.id,
+        };
+
+        cadastroJogo(dados);
       }
     }
   };
@@ -114,6 +141,8 @@ export default function EscolherEquipe() {
           ) : (
             <p>Carregando equipes...</p>
           )}
+
+          {mensagemErro && <ErrorMessage>{mensagemErro}</ErrorMessage>}
 
           <button onClick={isClick} disabled={!selectedEquipe}>
             Pronto
