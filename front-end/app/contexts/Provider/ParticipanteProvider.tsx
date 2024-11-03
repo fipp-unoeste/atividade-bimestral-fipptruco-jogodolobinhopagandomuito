@@ -1,28 +1,30 @@
 "use client";
 
 import { useState } from "react";
-import useContexts, { DadosJogo } from "../Context";
+import useContexts, { DadosParticipante } from "../Context";
 import axios from "axios";
 import { useDadosUsuarioContext } from "../useContext";
-import { useRouter } from "next/navigation";
 
-export const JogoProvider = ({ children }: { children: React.ReactNode }) => {
-  const [jogos, setJogos] = useState<DadosJogo[] | null>(null);
-  const router = useRouter();
+export const ParticipanteProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const [participantes, setParticipantes] = useState<
+    DadosParticipante[] | null
+  >(null);
   const { setMensagemErro } = useDadosUsuarioContext();
 
-  const cadastroJogo = async (dadosJogo: DadosJogo) => {
+  const cadastroParticipante = async (dadosParticipante: DadosParticipante) => {
     try {
       let response;
-      const url = "http://localhost:5000/jogos/";
+      const url = "http://localhost:5000/participantes/";
 
-      response = await axios.post(url, dadosJogo);
+      response = await axios.post(url, dadosParticipante);
 
       console.log("Dados enviados com sucesso:", response.data);
 
-      setJogos(response.data.jogo);
-
-      router.push("jogo");
+      setParticipantes(response.data.participante);
     } catch (error: unknown) {
       console.error("Erro:", error);
 
@@ -38,14 +40,14 @@ export const JogoProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <useContexts.DadosJogoContext.Provider
+    <useContexts.DadosParticipanteContext.Provider
       value={{
-        jogos,
-        setJogos,
-        cadastroJogo,
+        participantes,
+        setParticipantes,
+        cadastroParticipante,
       }}
     >
       {children}
-    </useContexts.DadosJogoContext.Provider>
+    </useContexts.DadosParticipanteContext.Provider>
   );
 };

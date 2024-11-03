@@ -2,6 +2,7 @@ import swaggerAutogen from "swagger-autogen";
 import UsuarioEntity from "./entities/usuarioEntity.js";
 import SalaEntity from "./entities/salaEntity.js";
 import JogoEntity from "./entities/jogoEntity.js";
+import ParticipanteEntity from "./entities/participanteEntity.js";
 
 const doc = {
   info: {
@@ -21,8 +22,16 @@ const doc = {
       jogoModel: new JogoEntity(
         0,
         "01/11/2024 17:33:47",
-        "01/11/2024 17:63:47",
+        "01/11/2024 17:43:47",
         1
+      ).toJSON(),
+      participanteModel: new ParticipanteEntity(
+        0,
+        "01/11/2024 17:33:47",
+        "01/11/2024 17:43:47",
+        1,
+        1,
+        3
       ).toJSON(),
     },
     securitySchemes: {

@@ -21,12 +21,17 @@ export const useDadosJogoContext = () => {
   return useContext(Contexts.DadosJogoContext);
 };
 
+export const useDadosParticipanteContext = () => {
+  return useContext(Contexts.DadosParticipanteContext);
+};
+
 const useContexts = {
   useDadosUsuarioContext,
   useAutenticacaoContext,
   useDadosSalaContext,
   useDadosEquipeContext,
   useDadosJogoContext,
+  useDadosParticipanteContext,
 };
 
 export default useContexts;

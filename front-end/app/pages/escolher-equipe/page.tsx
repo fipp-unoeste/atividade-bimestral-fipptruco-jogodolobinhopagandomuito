@@ -5,6 +5,7 @@ import { ErrorMessage } from "@/app/components/Formulario";
 import {
   useDadosEquipeContext,
   useDadosJogoContext,
+  useDadosParticipanteContext,
   useDadosSalaContext,
   useDadosUsuarioContext,
 } from "@/app/contexts/useContext";
@@ -78,7 +79,8 @@ export default function EscolherEquipe() {
   const { todasEquipes, equipes, setEquipe } = useDadosEquipeContext();
   const { salaEscolhida } = useDadosSalaContext();
   const { cadastroJogo } = useDadosJogoContext();
-  const { mensagemErro, setMensagemErro } = useDadosUsuarioContext();
+  const { cadastroParticipante } = useDadosParticipanteContext();
+  const { mensagemErro, setMensagemErro, usuario } = useDadosUsuarioContext();
   const [dataFormatada, setDataFormatada] = useState<string | null>(null);
 
   useEffect(() => {
@@ -105,14 +107,25 @@ export default function EscolherEquipe() {
 
         setDataFormatada(dataAtualFormatada);
 
-        const dados = {
-          id: equipeSelecionada.id,
+        const dadosParticipante = {
+          id: 0,
+          dtEntrada: dataAtual,
+          dtSaida: null,
+          usuarioId: usuario?.id,
+          salaId: salaEscolhida?.id,
+          equipeId: equipeSelecionada.id,
+        };
+
+        cadastroParticipante(dadosParticipante);
+
+        const dadosJogo = {
+          id: 0,
           dtInicio: dataAtual,
           dtFim: null,
           salaId: salaEscolhida?.id,
         };
 
-        cadastroJogo(dados);
+        cadastroJogo(dadosJogo);
       }
     }
   };
