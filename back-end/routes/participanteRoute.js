@@ -37,4 +37,22 @@ router.post("/", (req, res) => {
   ctrl.gravar(req, res);
 });
 
+router.patch("/", (req, res) => {
+  //#swagger.tags = ['Participante']
+  //#swagger.summary = 'Realiza a saida do jogo'
+  /*  #swagger.requestBody = {
+          required: true,
+          content: {
+              "application/json": {
+                  schema: {
+                      $ref: "#/components/schemas/participanteModel"
+                  }  
+              }
+          }
+      } 
+  */
+
+  ctrl.saidaDoJogo(req, res);
+});
+
 export default router;

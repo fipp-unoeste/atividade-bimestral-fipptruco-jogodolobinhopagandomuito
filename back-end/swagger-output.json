@@ -371,6 +371,37 @@
             }
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "Jogo"
+        ],
+        "summary": "Realiza o fim do jogo",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/jogoModel"
+              }
+            }
+          }
+        }
       }
     },
     "/jogos/{id}": {
@@ -428,6 +459,37 @@
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/participanteModel"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Participante"
+        ],
+        "summary": "Realiza a saida do jogo",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
           },
           "400": {
             "description": "Bad Request"

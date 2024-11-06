@@ -2,8 +2,8 @@ import ParticipanteRepository from "../repositories/participanteRepository.js";
 import UsuarioRepository from "../repositories/usuarioRepository.js";
 import SalaRepository from "../repositories/salaRepository.js";
 import EquipeRepository from "../repositories/equipeRepository.js";
-import { isValid } from "date-fns";
 import ParticipanteEntity from "../entities/participanteEntity.js";
+import { isValid, parse } from "date-fns";
 
 export default class ParticipanteController {
   async listar(req, res) {
@@ -73,19 +73,27 @@ export default class ParticipanteController {
         if (!isValid(dataEntrada)) {
           return res.status(400).json({ msg: "Data de entrada inválida!" });
         }
-        
+
         if (dataSaida && !isValid(dataSaida)) {
           return res.status(400).json({ msg: "Data de saida inválida!" });
         }
 
         let repo = new ParticipanteRepository();
-        let entidade = new ParticipanteEntity(0, dataEntrada, dataSaida, usuarioId, salaId, equipeId);
+        let entidade = new ParticipanteEntity(
+          0,
+          dataEntrada,
+          dataSaida,
+          usuarioId,
+          salaId,
+          equipeId
+        );
         let result = await repo.gravar(entidade);
 
         if (result) {
-          res
-            .status(201)
-            .json({ msg: "Participante gravado com sucesso!", participante: result });
+          res.status(201).json({
+            msg: "Participante gravado com sucesso!",
+            participante: result,
+          });
         } else {
           throw new Error("Erro ao inserir o participante no banco de dados");
         }
@@ -96,6 +104,46 @@ export default class ParticipanteController {
       }
     } catch (ex) {
       console.error("Erro ao gravar participante:", ex);
+      res.status(500).json({ msg: ex.message });
+    }
+  }
+
+  async saidaDoJogo(req, res) {
+    try {
+      let { id, dtSaida } = req.body;
+
+      if (id && dtSaida) {
+        let dataSaida = parse(dtSaida, "dd/MM/yyyy, HH:mm:ss", new Date());
+
+        if (!isValid(dataSaida)) {
+          return res.status(400).json({ msg: "Data de saida inválida!" });
+        }
+
+        let participanteRepo = new ParticipanteRepository();
+        let entidade = new ParticipanteEntity(
+          id,
+          null,
+          dataSaida,
+          null,
+          null,
+          null
+        );
+        let participanteAtualizado = await participanteRepo.saidaDoJogo(
+          entidade
+        );
+
+        if (participanteAtualizado) {
+          res.status(200).json({
+            msg: "Saida do jogo realizado com sucesso!",
+            participante: participanteAtualizado,
+          });
+        } else {
+          res.status(404).json({ msg: "Participante não encontrado!" });
+        }
+      } else {
+        res.status(400).json({ msg: "Informe os parâmetros corretamente!" });
+      }
+    } catch (ex) {
       res.status(500).json({ msg: ex.message });
     }
   }

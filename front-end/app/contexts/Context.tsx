@@ -65,9 +65,10 @@ export interface DadosJogo {
 }
 
 interface DadosJogoType {
-  jogos: DadosJogo[] | null;
-  setJogos: (jogo: DadosJogo[] | null) => void;
+  jogos: DadosJogo | null;
+  setJogos: (jogo: DadosJogo | null) => void;
   cadastroJogo: (dados: DadosJogo) => Promise<void>;
+  sairDoJogo: (id: number, dtFim: string) => Promise<void>;
 }
 
 export interface DadosParticipante {
@@ -80,9 +81,15 @@ export interface DadosParticipante {
 }
 
 interface DadosParticipanteType {
-  participantes: DadosParticipante[] | null;
-  setParticipantes: (participante: DadosParticipante[] | null) => void;
+  participantes: DadosParticipante | null;
+  setParticipantes: (participante: DadosParticipante | null) => void;
   cadastroParticipante: (dados: DadosParticipante) => Promise<void>;
+  fimDeJogo: (id: number, dtSaida: string) => Promise<void>;
+}
+
+interface SalaJogoType {
+  isSalaJogo: boolean;
+  setIsSalaJogo: (valor: boolean) => void;
 }
 
 const DadosUsuarioContext = createContext<DadosUsuarioType>({
@@ -122,12 +129,19 @@ const DadosJogoContext = createContext<DadosJogoType>({
   jogos: null,
   setJogos: () => {},
   cadastroJogo: async () => {},
+  sairDoJogo: async () => {},
 });
 
 const DadosParticipanteContext = createContext<DadosParticipanteType>({
   participantes: null,
   setParticipantes: () => {},
   cadastroParticipante: async () => {},
+  fimDeJogo: async () => {},
+});
+
+const SalaJogoContext = createContext<SalaJogoType>({
+  isSalaJogo: false,
+  setIsSalaJogo: () => {},
 });
 
 DadosUsuarioContext.displayName = "DadosUsuario";
@@ -136,6 +150,7 @@ DadosSalaContext.displayName = "DadosSala";
 DadosEquipeContext.displayName = "DadosEquipe";
 DadosJogoContext.displayName = "DadosJogo";
 DadosParticipanteContext.displayName = "DadosParticipante";
+SalaJogoContext.displayName = "SalaJogos";
 
 const Contexts = {
   DadosUsuarioContext,
@@ -144,6 +159,7 @@ const Contexts = {
   DadosEquipeContext,
   DadosJogoContext,
   DadosParticipanteContext,
+  SalaJogoContext,
 };
 
 export default Contexts;

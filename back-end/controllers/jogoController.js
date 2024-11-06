@@ -1,7 +1,7 @@
 import JogoEntity from "../entities/jogoEntity.js";
 import JogoRepository from "../repositories/jogoRepository.js";
 import SalaRepository from "../repositories/salaRepository.js";
-import { isValid } from "date-fns";
+import { isValid, parse } from "date-fns";
 
 export default class JogoController {
   async listar(req, res) {
@@ -44,14 +44,10 @@ export default class JogoController {
         }
 
         let dataInicio = new Date(dtInicio);
-        let dataFim = dtFim ? new Date(dtFim) : null;
+        let dataFim = dtFim;
 
         if (!isValid(dataInicio)) {
           return res.status(400).json({ msg: "Data de início inválida!" });
-        }
-
-        if (dtFim && !isValid(dataFim)) {
-          return res.status(400).json({ msg: "Data de fim inválida!" });
         }
 
         let repo = new JogoRepository();
@@ -72,6 +68,37 @@ export default class JogoController {
       }
     } catch (ex) {
       console.error("Erro ao gravar jogo:", ex);
+      res.status(500).json({ msg: ex.message });
+    }
+  }
+
+  async fimDeJogo(req, res) {
+    try {
+      let { id, dtFim } = req.body;
+
+      if (id && dtFim) {
+        let dataFim = parse(dtFim, "dd/MM/yyyy, HH:mm:ss", new Date());
+
+        if (!isValid(dataFim)) {
+          return res.status(400).json({ msg: "Data de fim inválida!" });
+        }
+
+        let jogoRepo = new JogoRepository();
+        let entidade = new JogoEntity(id, null, dataFim, null);
+        let jogoAtualizado = await jogoRepo.fimDeJogo(entidade);
+
+        if (jogoAtualizado) {
+          res.status(200).json({
+            msg: "Fim de jogo realizado com sucesso!",
+            jogo: jogoAtualizado,
+          });
+        } else {
+          res.status(404).json({ msg: "Jogo não encontrado!" });
+        }
+      } else {
+        res.status(400).json({ msg: "Informe os parâmetros corretamente!" });
+      }
+    } catch (ex) {
       res.status(500).json({ msg: ex.message });
     }
   }

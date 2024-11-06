@@ -36,6 +36,19 @@ export default class JogoRepository extends BaseRepository {
     }
   }
 
+  async fimDeJogo(entidade) {
+    let sql =
+      "UPDATE tb_jogo SET jog_dtfim = coalesce(?, jog_dtfim) WHERE jog_id = ?";
+    let valores = [entidade.dtFim, entidade.id];
+    let result = await this.db.ExecutaComandoNonQuery(sql, valores);
+
+    if (result) {
+      return await this.obter(entidade.id);
+    }
+
+    return null;
+  }
+
   toMap(rows) {
     if (rows && typeof rows.length == "number") {
       let lista = [];

@@ -50,7 +50,7 @@ interface CampoNavProps {
   texto: string;
   link: string;
   estilo?: string;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export default function CampoNav({
@@ -59,9 +59,16 @@ export default function CampoNav({
   estilo,
   onClick,
 }: CampoNavProps): JSX.Element {
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (onClick) {
+      event.preventDefault();
+      onClick(event);
+    }
+  };
+
   return (
     <Link href={link} passHref>
-      <CampoNavEstilizado estilo={estilo} onClick={onClick}>
+      <CampoNavEstilizado estilo={estilo} onClick={handleClick}>
         {texto}
       </CampoNavEstilizado>
     </Link>

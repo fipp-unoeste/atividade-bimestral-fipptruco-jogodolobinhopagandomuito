@@ -37,4 +37,22 @@ router.post("/", (req, res) => {
   ctrl.gravar(req, res);
 });
 
+router.patch("/", (req, res) => {
+  //#swagger.tags = ['Jogo']
+  //#swagger.summary = 'Realiza o fim do jogo'
+  /*  #swagger.requestBody = {
+          required: true,
+          content: {
+              "application/json": {
+                  schema: {
+                      $ref: "#/components/schemas/jogoModel"
+                  }  
+              }
+          }
+      } 
+  */
+
+  ctrl.fimDeJogo(req, res);
+});
+
 export default router;

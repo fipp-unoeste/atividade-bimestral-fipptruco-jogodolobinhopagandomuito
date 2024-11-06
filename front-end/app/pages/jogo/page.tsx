@@ -2,10 +2,10 @@
 
 import PaginaBase from "@/app/pageBase";
 
-export default function Jogo(){
-  return(
+export default function Jogo() {
+  return (
     <PaginaBase>
-      das
+      fsd
     </PaginaBase>
-  )
+  );
 }

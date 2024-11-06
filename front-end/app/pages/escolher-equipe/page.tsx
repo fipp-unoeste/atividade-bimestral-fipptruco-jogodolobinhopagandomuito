@@ -106,7 +106,7 @@ export default function EscolherEquipe() {
         });
 
         setDataFormatada(dataAtualFormatada);
-
+        
         const dadosParticipante = {
           id: 0,
           dtEntrada: dataAtual,

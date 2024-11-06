@@ -42,6 +42,19 @@ export default class ParticipanteRepository extends BaseRepository {
     }
   }
 
+  async saidaDoJogo(entidade) {
+    let sql =
+      "UPDATE tb_participante SET par_dtsaida = coalesce(?, par_dtsaida) WHERE par_id = ?";
+    let valores = [entidade.dtSaida, entidade.id];
+    let result = await this.db.ExecutaComandoNonQuery(sql, valores);
+
+    if (result) {
+      return await this.obter(entidade.id);
+    }
+
+    return null;
+  }
+
   toMap(rows) {
     if (rows && typeof rows.length == "number") {
       let lista = [];

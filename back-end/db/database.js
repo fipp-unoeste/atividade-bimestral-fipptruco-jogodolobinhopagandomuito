@@ -12,7 +12,7 @@ export default class Database {
 
   constructor() {
     this.#conexao = mysql.createPool({
-      host: "database-1.cdqoimge4duz.us-east-1.rds.amazonaws.com",
+      host: "database-1.cbe62gymiqoh.us-east-1.rds.amazonaws.com",
       port: 3306,
       database: "projeto_truco",
       user: "admin",
