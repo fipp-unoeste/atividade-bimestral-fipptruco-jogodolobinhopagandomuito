@@ -13,6 +13,7 @@ import routerJogo from "./routes/jogoRoute.js";
 import routerParticipante from "./routes/participanteRoute.js";
 
 const app = express();
+const port = process.env.PORT || 5000
 
 const corsOptions = {
   origin: "http://localhost:3000",
@@ -32,6 +33,6 @@ app.use("/equipes", routerEquipe);
 app.use("/jogos", routerJogo);
 app.use("/participantes", routerParticipante);
 
-app.listen(5000, function () {
+app.listen(port, function () {
   console.log("Servidor Web em Funcionamento!");
 });
