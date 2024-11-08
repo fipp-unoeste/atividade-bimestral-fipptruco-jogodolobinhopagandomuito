@@ -542,6 +542,84 @@
           }
         }
       }
+    },
+    "/maos/": {
+      "get": {
+        "tags": [
+          "Mão"
+        ],
+        "summary": "Endpoint para retornar todas as mão",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Mão"
+        ],
+        "summary": "Salva uma mão",
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/maoModel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/maos/{id}": {
+      "get": {
+        "tags": [
+          "Mão"
+        ],
+        "summary": "Retorna uma mão baseado em um código",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     }
   },
   "components": {
