@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import CampoJogador from "../CampoJogador";
 import CampoCartasJogo from "../CampoCartasJogo";
@@ -53,15 +54,69 @@ async function criarDeck(): Promise<string> {
   return data.deck_id;
 }
 
-async function comprarCartas(deckId: string, count: number): Promise<Card[]> {
+// Função atualizada para bloquear a compra das cartas 8, 9 e 10
+async function comprarCartas(
+  deckId: string,
+  count: number,
+  excluir: string[] = []
+): Promise<Card[]> {
   const response = await fetch(
     `https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=${count}`
   );
   const data = await response.json();
-  return data.cards;
+
+  let cartas = data.cards.filter(
+    (carta: Card) => !excluir.includes(carta.code)
+  );
+
+  // Continua comprando cartas até que o número desejado seja atingido
+  while (cartas.length < count) {
+    const adicional = await comprarCartas(
+      deckId,
+      count - cartas.length,
+      excluir
+    );
+    cartas = [...cartas, ...adicional];
+  }
+
+  return cartas;
 }
 
 export default function CampoJogo() {
+  const [vira, setVira] = useState<Card | null>(null);
+  const [deckId, setDeckId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const sortearVira = async () => {
+      try {
+        const novoDeckId = await criarDeck();
+        setDeckId(novoDeckId);
+
+        const excluirCartas = [
+          "8C",
+          "8D",
+          "8H",
+          "8S", 
+          "9C",
+          "9D",
+          "9H",
+          "9S", 
+          "10C",
+          "10D",
+          "10H",
+          "10S", 
+        ];
+
+        const [cartaVira] = await comprarCartas(novoDeckId, 1, excluirCartas);
+        setVira(cartaVira);
+      } catch (error) {
+        console.error("Erro ao sortear a vira: ", error);
+      }
+    };
+
+    sortearVira();
+  }, []);
+
   return (
     <SectionEstilizado>
       <div className="divsEstilizadas" id="divEquipes">
@@ -85,10 +140,7 @@ export default function CampoJogo() {
         </div>
 
         <div>
-          <CampoCartasJogo
-            criarDeck={criarDeck}
-            comprarCartas={comprarCartas}
-          />
+          <CampoCartasJogo cartaVira={vira} />
         </div>
 
         <div className="divsEstilizadas">
@@ -97,7 +149,11 @@ export default function CampoJogo() {
         </div>
       </div>
 
-      <CampoCartasJogador criarDeck={criarDeck} comprarCartas={comprarCartas} />
+      <CampoCartasJogador
+        criarDeck={criarDeck}
+        comprarCartas={comprarCartas}
+        cartaVira={vira}
+      />
     </SectionEstilizado>
   );
 }

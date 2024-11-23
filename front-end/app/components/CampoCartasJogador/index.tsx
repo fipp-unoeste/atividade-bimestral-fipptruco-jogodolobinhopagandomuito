@@ -21,22 +21,52 @@ const DivEstilizada = styled.div`
 
 interface CampoCartasJogadorProps {
   criarDeck: () => Promise<string>;
-  comprarCartas: (deckId: string, count: number) => Promise<Card[]>;
+  comprarCartas(
+    deckId: string,
+    count: number,
+    excluir: string[]
+  ): Promise<Card[]>;
+  cartaVira: Card | null;
 }
 
 export default function CampoCartasJogador({
   criarDeck,
   comprarCartas,
+  cartaVira,
 }: CampoCartasJogadorProps): JSX.Element {
   const [cartas, setCartas] = useState<Card[]>([]);
   const [carregando, setCarregando] = useState<boolean>(true);
+
+  const excluirCartas = [
+    "8C",
+    "8D",
+    "8H",
+    "8S",
+    "9C",
+    "9D",
+    "9H",
+    "9S",
+    "10C",
+    "10D",
+    "10H",
+    "10S",
+  ];
 
   useEffect(() => {
     const cartasDoJogador = async () => {
       try {
         const deckId = await criarDeck();
-        const comprarCarta = await comprarCartas(deckId, 3);
-        setCartas(comprarCarta);
+        let cartasDoJogador = await comprarCartas(deckId, 3, excluirCartas);
+
+        if (cartaVira) {
+          const excluirCartasVira = [cartaVira.code];
+          cartasDoJogador = await comprarCartas(deckId, 3, [
+            ...excluirCartas,
+            ...excluirCartasVira,
+          ]);
+        }
+
+        setCartas(cartasDoJogador);
         setCarregando(false);
       } catch (error) {
         console.error("Erro ao buscar as cartas: ", error);
@@ -44,7 +74,7 @@ export default function CampoCartasJogador({
     };
 
     cartasDoJogador();
-  }, [criarDeck, comprarCartas]);
+  }, [criarDeck, comprarCartas, cartaVira]);
 
   return (
     <DivEstilizada>
