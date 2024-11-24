@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Card } from "../CampoJogo";
 
@@ -16,75 +15,37 @@ const DivEstilizada = styled.div`
   img {
     width: 200px;
     height: 270px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  img:hover {
+    transform: scale(1.1);
   }
 `;
 
 interface CampoCartasJogadorProps {
-  criarDeck: () => Promise<string>;
-  comprarCartas(
-    deckId: string,
-    count: number,
-    excluir: string[]
-  ): Promise<Card[]>;
-  cartaVira: Card | null;
+  cartas: Card[];
+  onJogarCarta: (carta: Card) => void;
 }
 
 export default function CampoCartasJogador({
-  criarDeck,
-  comprarCartas,
-  cartaVira,
+  cartas,
+  onJogarCarta,
 }: CampoCartasJogadorProps): JSX.Element {
-  const [cartas, setCartas] = useState<Card[]>([]);
-  const [carregando, setCarregando] = useState<boolean>(true);
-
-  const excluirCartas = [
-    "8C",
-    "8D",
-    "8H",
-    "8S",
-    "9C",
-    "9D",
-    "9H",
-    "9S",
-    "10C",
-    "10D",
-    "10H",
-    "10S",
-  ];
-
-  useEffect(() => {
-    const cartasDoJogador = async () => {
-      try {
-        const deckId = await criarDeck();
-        let cartasDoJogador = await comprarCartas(deckId, 3, excluirCartas);
-
-        if (cartaVira) {
-          const excluirCartasVira = [cartaVira.code];
-          cartasDoJogador = await comprarCartas(deckId, 3, [
-            ...excluirCartas,
-            ...excluirCartasVira,
-          ]);
-        }
-
-        setCartas(cartasDoJogador);
-        setCarregando(false);
-      } catch (error) {
-        console.error("Erro ao buscar as cartas: ", error);
-      }
-    };
-
-    cartasDoJogador();
-  }, [criarDeck, comprarCartas, cartaVira]);
-
   return (
     <DivEstilizada>
-      {carregando ? (
-        <p>Carregando suas cartas...</p>
+      {cartas.length === 0 ? (
+        <p>Você não possui cartas!</p>
       ) : (
         <>
           {cartas.map((carta) => (
             <div key={carta.code} className="carta">
-              <img src={carta.image} alt={`${carta.value} of ${carta.suit}`} />
+              <img
+                src={carta.image}
+                alt={`${carta.value} of ${carta.suit}`}
+                onClick={() => onJogarCarta(carta)}
+              />
             </div>
           ))}
         </>

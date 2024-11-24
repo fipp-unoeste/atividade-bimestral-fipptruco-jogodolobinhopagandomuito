@@ -20,15 +20,17 @@ const DivEstilizada = styled.div`
 `;
 
 interface CampoCartasJogoProps {
-  cartaVira: Card | null; 
+  cartaVira: Card | null;
+  cartasJogadas: Card[];
 }
 
 export default function CampoCartasJogo({
-  cartaVira, 
+  cartaVira,
+  cartasJogadas,
 }: CampoCartasJogoProps): JSX.Element {
   return (
     <DivEstilizada>
-      {cartaVira ? ( 
+      {cartaVira ? (
         <div>
           <p>Vira</p>
           <img
@@ -39,6 +41,21 @@ export default function CampoCartasJogo({
       ) : (
         <p>Carregando a vira...</p>
       )}
+
+      <div>
+        <p>Cartas Jogadas:</p>
+        {cartasJogadas.length > 0 ? (
+          cartasJogadas.map((carta, index) => (
+            <img
+              key={index}
+              src={carta.image}
+              alt={`${carta.value} de ${carta.suit}`}
+            />
+          ))
+        ) : (
+          <p>Nenhuma carta jogada ainda.</p>
+        )}
+      </div>
     </DivEstilizada>
   );
 }
